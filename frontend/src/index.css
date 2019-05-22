@@ -3,5 +3,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #ecf0f1;
+  background: rgb(234,236,237);
+  background: linear-gradient(90deg, rgba(234,236,237,1) 0%, rgba(201,251,249,1) 100%);
 }
