@@ -14,7 +14,7 @@
   font-weight: bold;
 }
 
-.App > button{
+.App > a > button{
   background-color: #99d5fa;
   border:none;
   padding: 15px;
@@ -24,7 +24,7 @@
   cursor: pointer;
   border-radius: 10px;
 }
-.App > button:hover {
+.App > a > button:hover {
   background: #66abd6;
   letter-spacing: 1px;
   -webkit-box-shadow: 0px 5px 40px -10px rgba(185, 251, 249,0.57);
@@ -44,5 +44,5 @@
 }
 
 .App > h4 > a:hover{
-  color: #22ae60;
+  color: #66abd6;
 }

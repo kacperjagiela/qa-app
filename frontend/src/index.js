@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import {BrowserRouter} from 'react-router-dom';
+import Switcher from './components/Switcher';
 import './styles/index.css';
 
 ReactDOM.render(
-  <App />,
+  <BrowserRouter><Switcher/></BrowserRouter>,
   document.getElementById('root')
 );
