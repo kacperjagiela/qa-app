@@ -5,7 +5,7 @@ class StepThree extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			mounted:false
+			
 		};
 	}
 

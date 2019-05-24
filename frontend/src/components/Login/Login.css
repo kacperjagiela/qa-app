@@ -1,8 +1,9 @@
-.registration{
+.login{
 	font-family: 'Roboto', sans-serif;
     width:60vw;
     height: 70vh;
     margin-top:30vh;
     margin-left:20vw;
 	background-color:transparent;
+	text-align:center;
 }

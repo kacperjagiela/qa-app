@@ -19,7 +19,6 @@ class Registration extends React.Component{
 		};
 		this.getInput = this.getInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.goBack = this.goBack.bind(this);
 		this.nextStep = this.nextStep.bind(this);
 	}
 
@@ -33,21 +32,19 @@ class Registration extends React.Component{
 		}
 	}
 
-	goBack(){
-		this.setState({step:this.state.step-1});
-	}
 	nextStep(e){
 		e.preventDefault();
 		this.setState({step:this.state.step+1});
 	}
 	handleSubmit(){
-
+		//Send state to server
 	}
 
 	render(){
 		const steps =[
 			<StepOne onChange={this.getInput} value={this.state.email} nextStep={this.nextStep}></StepOne>,
-			<StepTwo onChange={this.getInput}></StepTwo>,
+			<StepTwo onChange={this.getInput} username={this.state.username} password={this.state.password}
+				nextStep={this.nextStep}></StepTwo>,
 			<StepThree onChange={this.getInput} ></StepThree>
 		];
 		return(

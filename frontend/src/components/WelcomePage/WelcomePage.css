@@ -1,9 +1,9 @@
 .welcome-page{
   font-family: 'Roboto', sans-serif;
   width:100vw;
-  height:80vh;
+  height:75vh;
   text-align: center;
-  padding-top:20vh;
+  padding-top:25vh;
 }
 
 .welcome-page > h1{
