@@ -1,17 +1,29 @@
 import * as React from "react";
 import styled, {keyframes} from "styled-components";
-import {fadeIn} from "react-animations";
+import {fadeInRight} from "react-animations";
+
+/*
+	Did walk around so
+*/
 
 class StepOne extends React.Component{
-	render(){
-		// eslint-disable-next-line no-unused-vars
-		const Div = styled(this.props.div)` 
+	constructor(props){
+		super(props);
+		this.state = {
+			mounted:false
+		};
+		this.div = styled(this.props.div)`
 			background-color:red;
-			animation: 1.5s ${keyframes `${fadeIn}`} 
+			animation: 1.5s ${keyframes `${fadeInRight}`};
 		`;
+	}
+
+	render(){
+		const Div = this.div; // eslint-disable-line no-unused-vars
 		return(
 			<Div>
-				<h1>One</h1>
+				<h1>Hello 1</h1>
+				{this.props.input}
 				{this.props.button}
 			</Div>
 		);
