@@ -1,40 +1,26 @@
 import * as React from "react";
-import ".//Registration.css";
+import "./Registration.css";
 import StepOne from "./RegistrationSteps/StepOne"; // eslint-disable-line no-unused-vars
 import StepTwo from "./RegistrationSteps/StepTwo"; // eslint-disable-line no-unused-vars
 import StepThree from "./RegistrationSteps/StepThree"; // eslint-disable-line no-unused-vars
-import styled from "styled-components";
-
-
-const Div = styled.div`
-	width:60vw;
-	height:70vh;
-	margin-right:120vw;
-	border-radius:10px;
-	text-align:center;
-`;
 
 const inputTypes = ["email", "username", "password", "profilepicture", "description"];
 
 class Registration extends React.Component{
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state = {
 			step: 0,
 			email: "",
 			username: "",
 			password: "",
 			profilepicture: "",
-			description: "",
-			validEmail: "",
-			validUsername: "",
-			validPassword: "",
-			validProfilepicture: " ",
-			validDescription: ""
+			description: ""
 		};
 		this.getInput = this.getInput.bind(this);
-		this.checkEmail = this.checkEmail.bind(this);
-		this.checkUsernameAndPassword = this.checkUsernameAndPassword.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.goBack = this.goBack.bind(this);
+		this.nextStep = this.nextStep.bind(this);
 	}
 
 	getInput(event){
@@ -47,27 +33,25 @@ class Registration extends React.Component{
 		}
 	}
 
-	checkEmail(){
-		
+	goBack(){
+		this.setState({step:this.state.step-1});
 	}
-	
-	checkUsernameAndPassword(){
+	nextStep(e){
+		e.preventDefault();
+		this.setState({step:this.state.step+1});
+	}
+	handleSubmit(){
 
 	}
 
 	render(){
-		const buttons = [
-			<button onClick={this.checkEmail}>Next step</button>,
-			<button onClick={this.checkEmail}>Next step</button>
-		];
-		const input1 = <input type="email" onChange={this.getInput} key="email" name="email" value={this.state.email}/>;
 		const steps =[
-			<StepOne div={Div} input={input1} button={buttons[0]}></StepOne>,
-			<StepTwo div={Div} input={input1} button={buttons[1]}></StepTwo>,
-			<StepThree div={Div} input={input1}></StepThree>
+			<StepOne onChange={this.getInput} value={this.state.email} nextStep={this.nextStep}></StepOne>,
+			<StepTwo onChange={this.getInput}></StepTwo>,
+			<StepThree onChange={this.getInput} ></StepThree>
 		];
 		return(
-			<div className="Registration">
+			<div className="registration">
 				{steps[this.state.step]}
 			</div>
 		);

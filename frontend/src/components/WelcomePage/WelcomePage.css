@@ -1,4 +1,4 @@
-.WelcomePage{
+.welcome-page{
   font-family: 'Roboto', sans-serif;
   width:100vw;
   height:80vh;
@@ -6,13 +6,13 @@
   padding-top:20vh;
 }
 
-.WelcomePage > h1{
+.welcome-page > h1{
   font-family: 'Indie Flower', cursive;
   font-size:4.5vw;
   font-weight: bold;
 }
 
-.WelcomePage > a > button{
+.welcome-page > a > button{
   background-color: #99d5fa;
   border:none;
   padding: 15px;
@@ -22,7 +22,7 @@
   cursor: pointer;
   border-radius: 10px;
 }
-.WelcomePage > a > button:hover {
+.welcome-page > a > button:hover {
   background: #66abd6;
   letter-spacing: 1px;
   -webkit-box-shadow: 0px 5px 40px -10px rgba(185, 251, 249,0.57);
@@ -31,16 +31,16 @@
   transition: all 0.4s ease 0s;
   }
 
-.WelcomePage > h2{
+.welcome-page > h2{
   letter-spacing: 2px;
   font-size:1.5vw;
 }
 
-.WelcomePage > h4 > a{
+.welcome-page > h4 > a{
   color: inherit;
   letter-spacing: 0.5px;
 }
 
-.WelcomePage > h4 > a:hover{
+.welcome-page > h4 > a:hover{
   color: #66abd6;
 }
