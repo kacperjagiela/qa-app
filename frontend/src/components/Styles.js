@@ -1,10 +1,11 @@
 import styled, {keyframes} from "styled-components";
 import { fadeInRight } from "react-animations";
 
-export const Step = styled.div`
+// move generic styled components to /styles dir 
+
+export const FadeRight = styled.div`
 	width:60vw;
 	height:70vh;
-	margin-right:120vw;
 	border-radius:10px;
 	text-align:center;
 	animation: 1.5s ${keyframes `${fadeInRight}`};
@@ -12,6 +13,8 @@ export const Step = styled.div`
 
 export const InputText = styled.input`
 	width:15vw;
+	border-radius:5px;
+	border:none;
 `;
 
 export const Button = styled.input`

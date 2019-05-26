@@ -4,45 +4,43 @@ import StepOne from "./RegistrationSteps/StepOne"; // eslint-disable-line no-unu
 import StepTwo from "./RegistrationSteps/StepTwo"; // eslint-disable-line no-unused-vars
 import StepThree from "./RegistrationSteps/StepThree"; // eslint-disable-line no-unused-vars
 
-const inputTypes = ["email", "username", "password", "profilepicture", "description"];
-
 class Registration extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			step: 0,
+			step: 1,
 			email: "",
 			username: "",
 			password: "",
 			profilepicture: "",
 			description: ""
 		};
-		this.getInput = this.getInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.nextStep = this.nextStep.bind(this);
+		this.saveInput = this.saveInput.bind(this);
+	}
+	// TODO: figure out why = is unexpected token and rewrite it to anonymous functions
+	saveInput(value, key){
+		this.setState({[key]:value});
 	}
 
-	getInput(event){
-		event.preventDefault();
-		const index = inputTypes.indexOf(event.target.name);
-		if(index!==undefined){
-			let state = this.state;
-			state[inputTypes[index]] = event.target.value;
-			this.setState(state);
-		}
+	handleSubmit(){
+
 	}
 
 	nextStep(e){
 		e.preventDefault();
+		// make sure it's not bigger than array's length
 		this.setState({step:this.state.step+1});
 	}
-	handleSubmit(){
-		//Send state to server
-	}
 
+	onChange(value, validation){
+
+	}
+	
 	render(){
 		const steps =[
-			<StepOne onChange={this.getInput} value={this.state.email} nextStep={this.nextStep}></StepOne>,
+			<StepOne onChange={this.getInput} values={{email: this.state.email}} nextStep={this.nextStep}></StepOne>,
 			<StepTwo onChange={this.getInput} username={this.state.username} password={this.state.password}
 				nextStep={this.nextStep}></StepTwo>,
 			<StepThree onChange={this.getInput} ></StepThree>
