@@ -28,13 +28,13 @@ class StepOneForm extends React.Component{
 					<FormItem label="E-mail" hasFeedback>
 						{getFieldDecorator("email", {
 							rules:[{
-								required: true, message: "Please input your E-mail!" 
+								required: true, message: "Please enter your E-mail!" 
 							}
 							,{
 								type: "email", message: "The input is not valid E-mail!",
 							}]
 						})(
-							<Input prefix={<Icon type="mail" />} style={{width:"50%"}} placeholder="Email" onChange={this.props.onChange}/>
+							<Input prefix={<Icon type="mail" />} style={{width:"50%"}} placeholder="Email" onChange={e=>this.props.onChange(e, "email")}/>
 						)}
 					</FormItem>
 					<Button type="primary" htmlType="submit">Next</Button>

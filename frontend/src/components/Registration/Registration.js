@@ -26,20 +26,17 @@ class Registration extends React.Component{
 		this.saveInput = this.saveInput.bind(this);
 	}
 	// TODO: figure out why = is unexpected token and rewrite it to anonymous functions
-	saveInput(value, key){
-		this.setState({[key]:value});
+	// Save input value to state key declared on lower component
+	saveInput(e, key){
+		this.setState({[key]:e.target.value});
 	}
 
-	handleSubmit(){
-
-	}
-
+	// Progress into registration
 	nextStep(e){
 		e.preventDefault();
 		if(this.state.step<2){
 			this.setState({step:this.state.step+1});
 		}
-		
 	}
 	prevStep(e){
 		e.preventDefault();
@@ -48,23 +45,23 @@ class Registration extends React.Component{
 		}
 	}
 
-	// onChange(value, validation){
+	handleSubmit(){
 
-	// }
+	}
 	
 	render(){
 		const steps = [
 			{
 				title: "Email",
-				content: <StepOne onChange={this.getInput} value={this.state.email} nextStep={this.nextStep}></StepOne>,
+				content: <StepOne onChange={this.saveInput} value={this.state.email} nextStep={this.nextStep}></StepOne>,
 			},
 			{
 				title: "Username and Password",
-				content: <StepTwo onChange={this.getInput} username={this.state.username} password={this.state.password} nextStep={this.nextStep}></StepTwo>,
+				content: <StepTwo onChange={this.saveInput} username={this.state.username} password={this.state.password} nextStep={this.nextStep}></StepTwo>,
 			},
 			{
 				title: "Description",
-				content: <StepThree onChange={this.getInput} ></StepThree>,
+				content: <StepThree onChange={this.saveInput} ></StepThree>,
 			},
 		];
 		return(
