@@ -85,10 +85,10 @@ class StepTwoForm extends React.Component{
 								validator: this.checkConfirm,
 							}],
 						})(
-							<Input prefix={<Icon type="lock"/>} type="password" style={{width:"50%"}} placeholder="Confirm password" onBlur={this.handleConfirmBlur} p/>
+							<Input prefix={<Icon type="lock"/>} type="password" style={{width:"50%"}} placeholder="Confirm password" onBlur={this.handleConfirmBlur}/>
 						)}
 					</FormItem>
-
+					<Button onClick={this.props.prevStep}>Previous</Button>
 					<Button type="primary" htmlType="submit">Next</Button>
 				</Form>
 			</FadeInRight>

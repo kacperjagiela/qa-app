@@ -13,7 +13,7 @@ class Registration extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			step: 0,
+			step: 2,
 			email: "",
 			username: "",
 			password: "",
@@ -57,11 +57,11 @@ class Registration extends React.Component{
 			},
 			{
 				title: "Username and Password",
-				content: <StepTwo onChange={this.saveInput} username={this.state.username} password={this.state.password} nextStep={this.nextStep}></StepTwo>,
+				content: <StepTwo onChange={this.saveInput} username={this.state.username} password={this.state.password} prevStep={this.prevStep} nextStep={this.nextStep}></StepTwo>,
 			},
 			{
 				title: "Description",
-				content: <StepThree onChange={this.saveInput} ></StepThree>,
+				content: <StepThree onChange={this.saveInput} prevStep={this.prevStep}></StepThree>,
 			},
 		];
 		return(
