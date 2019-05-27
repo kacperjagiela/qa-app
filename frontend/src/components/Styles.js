@@ -3,11 +3,13 @@ import { fadeInRight } from "react-animations";
 
 // move generic styled components to /styles dir 
 
-export const FadeRight = styled.div`
-	width:60vw;
-	height:70vh;
+export const FadeInRight = styled.div`
+	width:100%;
+	heigth:100%;
 	border-radius:10px;
 	text-align:center;
+	margin-top:5vh;
+	margin-bottom:5vh;
 	animation: 1.5s ${keyframes `${fadeInRight}`};
 `;
 
