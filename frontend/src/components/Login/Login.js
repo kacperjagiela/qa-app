@@ -1,26 +1,35 @@
 import * as React from "react";
 import "./Login.css";
 import { Form, Icon, Input, Button, Checkbox, Typography} from "antd"; // eslint-disable-line no-unused-vars
+import axios from "axios";
 
 
 class LoginForm extends React.Component{
 	constructor(props){
 		super(props);
+		this.state = {
+			username: "",
+			password: "",
+			remember: true
+		};
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleChange = this.handleChange.bind(this);
 	}
 
 	handleSubmit(e){
 		e.preventDefault();
 		this.props.form.validateFields((err, values)=>{
 			if(!err){
-				console.log("Received values of form: ", values);
+				this.setState(values, ()=>{
+					axios.post("http://192.168.8.192:8080/login", {data:this.state} ,{withCredentials: true})
+						.then(()=>{
+							this.props.history.push("/home");
+						})
+						.catch(err=>{
+							console.log(err);
+						});
+				});
 			}
 		});
-	}
-
-	handleChange(e, key){
-
 	}
 
 	render(){
