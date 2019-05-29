@@ -13,11 +13,6 @@
   font-weight: bold;
 }
 
-.welcome-page > h2{
-  letter-spacing: 2px;
-  font-size:1.5vw;
-}
-
 .welcome-page > h4 > a{
   color: inherit;
   letter-spacing: 0.5px;

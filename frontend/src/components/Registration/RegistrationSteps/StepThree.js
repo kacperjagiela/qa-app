@@ -21,7 +21,6 @@ class StepThreeForm extends React.Component{
 	}
 
 	normFile(e){
-		console.log("Upload event:", e);
 		if(Array.isArray(e)){
 			return e;
 		}
@@ -29,11 +28,12 @@ class StepThreeForm extends React.Component{
 	}
 
 	async postFile(e){
-		console.log(e);
-		await axios.post("http://192.168.8.192:8080/add-file", {
-			file: e.file
-		}).then(res=>{
-			console.log(res);
+		let formData = new FormData();
+		formData.append("file", e.file);
+		await axios.post("http://192.168.8.192:8080/add-file", formData, {
+			headers: {
+				"Content-Type": "multipart/form-data"
+			}
 		});
 	}
 
@@ -54,7 +54,7 @@ class StepThreeForm extends React.Component{
 								valuePropName: "fileList",
 								getValueFromEvent: this.normFile,
 							})(
-								<Upload.Dragger name="files" multiple={false} customRequest={this.postFile}>
+								<Upload.Dragger name="file" multiple={false} action="http://192.168.8.192:8080/add-file">
 									<p className="ant-upload-drag-icon">
 										<Icon type="inbox" />
 									</p>
