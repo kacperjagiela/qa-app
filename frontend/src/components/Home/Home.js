@@ -1,28 +1,21 @@
 import * as React from "react";
-import {Cookies} from "react-cookie";
+import { Layout, Menu, Icon } from "antd"; // eslint-disable-line no-unused-vars
+import NavigationSider from "../Reusable/NavigationSider"; // eslint-disable-line no-unused-vars
+
+const { Content, Footer } = Layout; // eslint-disable-line no-unused-vars
 
 export default class Home extends React.Component{
-
-	constructor(props){
-		super(props);
-		const cookies = new Cookies();
-		this.state = {
-			login: cookies.get("login")
-		};
-		console.log(this.state);
-	}
 	render(){
-		if(this.state.login){
-			return(
-				<div className="home">
-					<h1>Welcome {this.state.login}</h1>
-				</div>
-			);
-		}else{
-			this.props.history.push("/");
-			return(
-				<h1></h1>
-			);
-		}
+		return(
+			<Layout style={{minHeight:"100vh"}}>
+				<NavigationSider selected="1"/>
+				<Layout>
+					<Content>
+						<h1>Basic content</h1>
+					</Content>
+					<Footer>Created by Kacper Jagieła</Footer>
+				</Layout>
+			</Layout>
+		);
 	}
 }

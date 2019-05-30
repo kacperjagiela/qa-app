@@ -7,3 +7,11 @@
     margin-left:20vw;
 	background-color:transparent;
 }
+
+@media screen and (max-width:768px){
+	.registration{
+		padding-top:2vh;
+		width:100vw;
+		margin-left: 0;
+	}
+}

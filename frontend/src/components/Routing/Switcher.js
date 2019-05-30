@@ -4,13 +4,13 @@ import {withRouter} from "react-router-dom";
 import WelcomePage from "../WelcomePage/WelcomePage";
 import Registration from "../Registration/Registration";
 import Login from "../Login/Login";
-import Home from "../Home/Home";
+import HomeWrapper from "../Home/HomeWrapper";
 
 class Switcher extends React.Component{
 	render(){
 		return(
 			<Switch>
-				<Route exact path="/home" component={Home}/>
+				<Route exact path="/home" component={HomeWrapper}/>
 				<Route exact path="/register" component={Registration}/>
 				<Route exact path="/login" component={withRouter(Login)}/>
 				<Route path="/" component={WelcomePage}/>
