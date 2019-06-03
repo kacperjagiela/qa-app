@@ -10,6 +10,7 @@ export default class HomeWrapper extends React.Component{
 		this.state = {
 			login: cookies.get("login")
 		};
+		//console.log(this.props);
 	}
 	render(){
 		if(!this.state.login){
