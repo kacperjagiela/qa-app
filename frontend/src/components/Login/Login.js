@@ -21,8 +21,11 @@ class LoginForm extends React.Component{
 			if(!err){
 				this.setState(values, ()=>{
 					axios.post("http://192.168.8.192:8080/login", {data:this.state} ,{withCredentials: true})
-						.then(()=>{
-							this.props.history.push("/home");
+						.then((res)=>{
+							console.log(res);
+							if(res==="Logged in"){
+								this.props.history.push("/home");
+							}
 						})
 						.catch(err=>{
 							return err;
