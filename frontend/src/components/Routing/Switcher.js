@@ -3,16 +3,11 @@ import {Switch, Route, Redirect} from "react-router-dom"; // eslint-disable-line
 import {withRouter} from "react-router-dom";
 import Registration from "../Registration/Registration";
 import Login from "../Login/Login";
-import HomeWrapper from "../Home/HomeWrapper";
+import HomeWrapper from "../Home/HomeWrapper"; // eslint-disable-line no-unused-vars
 import Profile from "../Profile/Profile";
-import Settings from "../Settings/Settings";
+import Settings from "../Settings/Settings"; // eslint-disable-line no-unused-vars
 
 class Switcher extends React.Component{
-	constructor(props){
-		super(props);
-		this.props.refresh();
-	}
-
 	render(){
 		return(
 			<Switch>
@@ -21,7 +16,7 @@ class Switcher extends React.Component{
 				<Route exact path="/register" component={Registration}/>
 				<Route exact path="/login" component={withRouter(Login)}/>
 				<Redirect from="/loginOK" to="/home"/>
-				<Route path="/" component={HomeWrapper}/>
+				<Route path="/" render={()=><HomeWrapper refresh={this.props.refresh}/>}/>
 			</Switch>
 		);
 	}
