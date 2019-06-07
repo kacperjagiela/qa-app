@@ -3,19 +3,22 @@ import {Cookies} from "react-cookie";
 import Home from "./Home"; // eslint-disable-line no-unused-vars
 import WelcomePage from "../WelcomePage/WelcomePage"; //eslint-disable-line no-unused-vars
 
+const cookies = new Cookies();
+
 export default class HomeWrapper extends React.Component{
 
 	constructor(props){
 		super(props);
-		const cookies = new Cookies();
 		this.state = {
-			login: cookies.get("login")
+			login: cookies.get("login"),
+			refresh: false
 		};
 	}
+
 	render(){
 		if(this.state.login){
 			return(
-				<Home login="123"/>
+				<Home login={this.state.login} refresh={this.props.refresh}/>
 			);
 		}else{
 			return(

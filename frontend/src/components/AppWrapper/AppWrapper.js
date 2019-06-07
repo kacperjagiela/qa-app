@@ -4,14 +4,20 @@ import NavigationSider from "../Reusable/NavigationSider"; // eslint-disable-lin
 import Switcher from "../Routing/Switcher"; // eslint-disable-line no-unused-vars
 import {Cookies} from "react-cookie";
 
+const cookies = new Cookies();
+
 export default class AppWrapper extends React.Component{
 	constructor(props){
 		super(props);
-		const cookies = new Cookies();
 		this.state = {
 			login: cookies.get("login"),
 			current:1
 		};
+		this.refresh = this.refresh.bind(this);
+	}
+	
+	refresh(){
+		this.setState({login:cookies.get("login")});
 	}
 
 	handleChange(e){
@@ -23,13 +29,13 @@ export default class AppWrapper extends React.Component{
 			return(
 				<Layout style={{minHeight:"100vh"}}>
 					<NavigationSider handleChange={this.handleChange.bind(this)} selected={this.state.current.toString()}/>
-					<Switcher/>
+					<Switcher refresh={this.refresh}/>
 				</Layout>
 			);
 		}else{
 			return(
 				<Layout style={{minHeight:"100vh"}}>
-					<Switcher/>
+					<Switcher refresh={this.refresh}/>
 				</Layout>
 			);
 		}
