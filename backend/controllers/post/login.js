@@ -18,6 +18,7 @@ module.exports = (app, bcrypt, db)=>{
 					res.send("Wrong username or password");
 				}
 			});
+			connection.release();
 		});
 	});
 }
