@@ -11,11 +11,10 @@ class Switcher extends React.Component{
 	render(){
 		return(
 			<Switch>
-				<Route exact path="/settings" component={Settings}/>
-				<Route exact path="/profile" component={Profile}/>
-				<Route exact path="/register" component={Registration}/>
+				<Route exact path="/settings" component={withRouter(Settings)}/>
+				<Route exact path="/profile" component={withRouter(Profile)}/>
+				<Route exact path="/register" component={withRouter(Registration)}/>
 				<Route exact path="/login" component={withRouter(Login)}/>
-				<Redirect from="/loginOK" to="/home"/>
 				<Route path="/" render={()=><HomeWrapper refresh={this.props.refresh}/>}/>
 			</Switch>
 		);

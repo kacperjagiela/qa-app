@@ -6,7 +6,9 @@ const { Content, Footer } = Layout; // eslint-disable-line no-unused-vars
 export default class Home extends React.Component{
 	constructor(props){
 		super(props);
-		this.props.refresh();
+		if(this.props.refresh){
+			this.props.refresh();
+		}
 	}
 
 	render(){

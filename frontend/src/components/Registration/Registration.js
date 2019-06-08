@@ -4,10 +4,11 @@ import StepOne from "./RegistrationSteps/StepOne"; // eslint-disable-line no-unu
 import StepTwo from "./RegistrationSteps/StepTwo"; // eslint-disable-line no-unused-vars
 import StepThree from "./RegistrationSteps/StepThree"; // eslint-disable-line no-unused-vars
 import { Steps, Button, message } from "antd"; // eslint-disable-line no-unused-vars
+import { Cookies } from "react-cookie";
 
 // eslint-disable-next-line no-unused-vars
 const Step = Steps.Step;
-
+const cookie = new Cookies();
 
 class Registration extends React.Component{
 	constructor(props){
@@ -64,16 +65,21 @@ class Registration extends React.Component{
 				content: <StepThree onChange={this.saveInput} prevStep={this.prevStep}></StepThree>,
 			},
 		];
-		return(
-			<div className="registration">
-				<Steps current={this.state.step}>
-					{steps.map(item => (
-						<Step key={item.title} title={item.title} />
-					))}
-				</Steps>
-				<div className="steps-content">{steps[this.state.step].content}</div>
-			</div>
-		);
+		if(cookie.get("login")){
+			this.props.history.push("home");
+			return null;
+		}else{
+			return(
+				<div className="registration">
+					<Steps current={this.state.step}>
+						{steps.map(item => (
+							<Step key={item.title} title={item.title} />
+						))}
+					</Steps>
+					<div className="steps-content">{steps[this.state.step].content}</div>
+				</div>
+			);
+		}
 	}
 }
 
