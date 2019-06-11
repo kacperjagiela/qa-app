@@ -1,3 +1,5 @@
+const saltRounds = 10;
+
 module.exports = (app, bcrypt, db)=>{
 	// Register to app
 	app.post("/register", (req, res)=>{

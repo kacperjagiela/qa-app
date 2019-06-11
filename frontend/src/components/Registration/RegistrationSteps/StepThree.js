@@ -11,21 +11,18 @@ const {TextArea} = Input;
 class StepThreeForm extends React.Component{
 	constructor(props){
 		super(props);
-		this.handleSubmit = this.handleSubmit.bind(this);
 		this.normFile = this.normFile.bind(this);
 		this.postFile = this.postFile.bind(this);
 	}
-
-	handleSubmit(){
-
-	}
-
+	
 	normFile(e){
 		if(Array.isArray(e)){
 			return e;
 		}
 		return e && e.fileList;
 	}
+
+	// TODO: upload file
 
 	async postFile(e){
 		let formData = new FormData();
@@ -41,7 +38,7 @@ class StepThreeForm extends React.Component{
 		const { getFieldDecorator } = this.props.form;
 		return(
 			<FadeInRight>
-				<Form >
+				<Form onSubmit={this.props.onSubmit}>
 					<Title>Last step!</Title>
 					<Title level={3}>Add something from yourself!</Title>
 					<Paragraph>(optional, can be changed later)</Paragraph>

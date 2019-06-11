@@ -3,8 +3,9 @@ import "./Registration.css";
 import StepOne from "./RegistrationSteps/StepOne"; // eslint-disable-line no-unused-vars
 import StepTwo from "./RegistrationSteps/StepTwo"; // eslint-disable-line no-unused-vars
 import StepThree from "./RegistrationSteps/StepThree"; // eslint-disable-line no-unused-vars
-import { Steps, Button, message } from "antd"; // eslint-disable-line no-unused-vars
+import { Steps, Alert } from "antd"; // eslint-disable-line no-unused-vars
 import { Cookies } from "react-cookie";
+import axios from "axios";
 
 // eslint-disable-next-line no-unused-vars
 const Step = Steps.Step;
@@ -19,14 +20,14 @@ class Registration extends React.Component{
 			username: "",
 			password: "",
 			profilepicture: "",
-			description: ""
+			description: "",
+			visible:false
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.nextStep = this.nextStep.bind(this);
 		this.prevStep = this.prevStep.bind(this);
 		this.saveInput = this.saveInput.bind(this);
 	}
-	// TODO: figure out why = is unexpected token and rewrite it to anonymous functions
 	// Save input value to state key declared on lower component
 	saveInput(e, key){
 		this.setState({[key]:e.target.value});
@@ -46,8 +47,17 @@ class Registration extends React.Component{
 		}
 	}
 
-	handleSubmit(){
-
+	handleSubmit(e){
+		e.preventDefault();
+		axios.post("http://192.168.8.192:8080/register", {data:this.state})
+			.then(res=>{
+				if(res.data==="Created user"){
+					this.setState({visible:true});
+				}
+			});
+	}
+	handleClose(){
+		this.props.history.push("/login");
 	}
 	
 	render(){
@@ -62,7 +72,7 @@ class Registration extends React.Component{
 			},
 			{
 				title: "Description",
-				content: <StepThree onChange={this.saveInput} prevStep={this.prevStep}></StepThree>,
+				content: <StepThree onChange={this.saveInput} prevStep={this.prevStep} onSubmit={e=>this.handleSubmit(e)}></StepThree>,
 			},
 		];
 		if(cookie.get("login")){
@@ -71,6 +81,14 @@ class Registration extends React.Component{
 		}else{
 			return(
 				<div className="registration">
+					{this.state.visible ? (
+						<Alert
+							message="User created succesfully!"
+							type="success"
+							closable
+							afterClose={this.handleClose.bind(this)}
+							style={{zIndex:3000, position:"absolute", top:"40vh", width:"100%", textAlign:"center"}}
+						/>): null }
 					<Steps current={this.state.step}>
 						{steps.map(item => (
 							<Step key={item.title} title={item.title} />

@@ -1,7 +1,6 @@
 const multer = require("multer");
 const database = require("../../database/database.js");
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
 
 //Require specific routes
 const login = require("./login.js");
