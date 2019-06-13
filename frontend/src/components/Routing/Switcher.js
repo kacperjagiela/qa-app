@@ -6,6 +6,7 @@ import Login from "../Login/Login";
 import HomeWrapper from "../Home/HomeWrapper"; // eslint-disable-line no-unused-vars
 import Profile from "../Profile/Profile";
 import Settings from "../Settings/Settings"; // eslint-disable-line no-unused-vars
+import Logout from "./Logout";
 
 class Switcher extends React.Component{
 	render(){
@@ -15,6 +16,7 @@ class Switcher extends React.Component{
 				<Route exact path="/profile" component={withRouter(Profile)}/>
 				<Route exact path="/register" component={withRouter(Registration)}/>
 				<Route exact path="/login" component={withRouter(Login)}/>
+				<Route exact path="/logout" component={withRouter(Logout)}/>
 				<Route path="/" render={()=><HomeWrapper refresh={this.props.refresh}/>}/>
 			</Switch>
 		);

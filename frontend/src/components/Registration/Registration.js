@@ -21,7 +21,8 @@ class Registration extends React.Component{
 			password: "",
 			profilepicture: "",
 			description: "",
-			visible:false
+			visible:false,
+			valid:true
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.nextStep = this.nextStep.bind(this);
@@ -53,6 +54,8 @@ class Registration extends React.Component{
 			.then(res=>{
 				if(res.data==="Created user"){
 					this.setState({visible:true});
+				}else{
+					this.setState({valid:false});
 				}
 			});
 	}
@@ -89,6 +92,15 @@ class Registration extends React.Component{
 							afterClose={this.handleClose.bind(this)}
 							style={{zIndex:3000, position:"absolute", top:"40vh", width:"100%", textAlign:"center"}}
 						/>): null }
+					{this.state.valid ? 
+						null : 
+						(<Alert
+							message="User already exists!"
+							type="error"
+							closable
+							afterClose={this.props.history.push("/register")}
+							style={{zIndex:3000, position:"absolute", top:"40vh", width:"100%", textAlign:"center"}}
+						/>) }
 					<Steps current={this.state.step}>
 						{steps.map(item => (
 							<Step key={item.title} title={item.title} />

@@ -4,6 +4,13 @@ import {Link} from "react-router-dom"; // eslint-disable-line no-unused-vars
 import {Button, Typography} from "antd"; // eslint-disable-line no-unused-vars
 
 class WelcomePage extends React.Component {
+	constructor(props){
+		super(props);
+		if(this.props.refresh){
+			this.props.refresh();
+		}
+	}
+
 	render() {
 		return (
 			<div className="welcome-page">
