@@ -12,3 +12,13 @@ export const FadeInRight = styled.div`
 	paddint-bottom:5vh;
 	animation: 1.5s ${keyframes `${fadeInRight}`};
 `;
+
+export const Profilepic = styled.img`
+	width:150px;
+	height:150px;
+
+	@media screen and (max-width:700px){
+		width:100px;
+		height:100px;
+	}
+`;

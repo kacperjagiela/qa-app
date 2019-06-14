@@ -27,14 +27,14 @@ export default class AppWrapper extends React.Component{
 	render(){
 		if(this.state.login){
 			return(
-				<Layout style={{minHeight:"100vh"}}>
+				<Layout style={{minHeight:"100vh", maxHeight:"100vh"}}>
 					<NavigationSider handleChange={this.handleChange.bind(this)} selected={this.state.current.toString()} login={this.state.login}/>
 					<Switcher refresh={this.refresh}/>
 				</Layout>
 			);
 		}else{
 			return(
-				<Layout style={{minHeight:"100vh"}}>
+				<Layout style={{minHeight:"100vh", maxHeight:"100vh"}}>
 					<Switcher refresh={this.refresh}/>
 				</Layout>
 			);
