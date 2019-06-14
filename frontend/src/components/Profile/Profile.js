@@ -11,10 +11,11 @@ const cookie = new Cookies();
 export default class Profile extends React.Component{
 	constructor(props){
 		super(props);
-		this.state={id:0};
+		this.state={questions:[]};
 	}
 
 	componentDidMount(){
+		//Get profile information from backend
 		axios.get(`http://192.168.8.192:8080/profile/${this.props.match.params.username}`)
 			.then(res=>{
 				this.setState({
@@ -24,6 +25,12 @@ export default class Profile extends React.Component{
 					description:res.data.description,
 					profilepic: res.data.profilepic
 				});
+				//Get questions from backend
+				axios.get(`http://192.168.8.192:8080/questions/${this.state.id}`)
+					.then(res=>{
+						this.setState({questions:res.data});
+						console.log(this.state.questions);
+					});
 			});
 	}
 
@@ -37,7 +44,9 @@ export default class Profile extends React.Component{
 						<Title level={2}>{this.state.username}</Title>
 						<Paragraph strong> {this.state.description}</Paragraph>
 						<div>
-							Get all user questions here
+							{this.state.questions.map((question, i)=>{
+								return (<p key={i}>{question.content}</p>);
+							})}
 						</div>
 					</Content>
 					<Footer>Created by Kacper Jagieła</Footer>
