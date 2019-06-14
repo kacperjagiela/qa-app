@@ -20,7 +20,7 @@ export default class NavigationSider extends React.Component{
 						</Link>
 					</Menu.Item>
 					<Menu.Item key="2" onClick={e=>this.props.handleChange(e)}>
-						<Link to="/profile">
+						<Link to={`/profile/${this.props.login}`}>
 							<Icon type="profile"/>
 							<span className="nav-text">Your profile</span>
 						</Link>

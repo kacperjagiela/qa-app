@@ -13,7 +13,7 @@ class Switcher extends React.Component{
 		return(
 			<Switch>
 				<Route exact path="/settings" component={withRouter(Settings)}/>
-				<Route exact path="/profile" component={withRouter(Profile)}/>
+				<Route exact path="/profile/:username" component={withRouter(Profile)}/>
 				<Route exact path="/register" component={withRouter(Registration)}/>
 				<Route exact path="/login" component={withRouter(Login)}/>
 				<Route exact path="/logout" component={withRouter(Logout)}/>

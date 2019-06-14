@@ -17,7 +17,7 @@ export default class AppWrapper extends React.Component{
 	}
 	
 	refresh(){
-		this.setState({login:cookies.get("login")});
+		this.setState({login:cookies.get("login"), current:1});
 	}
 
 	handleChange(e){
@@ -28,7 +28,7 @@ export default class AppWrapper extends React.Component{
 		if(this.state.login){
 			return(
 				<Layout style={{minHeight:"100vh"}}>
-					<NavigationSider handleChange={this.handleChange.bind(this)} selected={this.state.current.toString()}/>
+					<NavigationSider handleChange={this.handleChange.bind(this)} selected={this.state.current.toString()} login={this.state.login}/>
 					<Switcher refresh={this.refresh}/>
 				</Layout>
 			);

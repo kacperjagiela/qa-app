@@ -1,7 +1,15 @@
 const app = require("express")();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const postController = require("./controllers/post/postController.js");
+const getController = require("./controllers/get/controller.js");
+const postController = require("./controllers/post/controller.js");
+
+const multer = require("multer");
+const database = require("./database/database.js");
+const bcrypt = require("bcrypt");
+
+const upload = multer();
+const db = new database();
 
 //Enable CORS, body-parser, cookie-parser
 app.use(cookieParser(), bodyParser.urlencoded({extended:true}), bodyParser.json());
@@ -15,6 +23,8 @@ app.use((request, response, next) => {
     next();
 });
 
-postController(app);
+//Initialize controllers
+getController(app,db);
+postController(app, bcrypt, upload, db);
 
 app.listen(8080, "192.168.8.192", ()=>console.log("Listening on 8080.."));

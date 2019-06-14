@@ -12,10 +12,9 @@ class HomeWrapper extends React.Component{
 		this.state = {
 			login: cookies.get("login"),
 		};
-		console.log("a");
 	}
 
-	componentWillUnmount(){
+	componentDidMount(){
 		if(this.props.location.state){
 			this.props.refresh();
 		}
