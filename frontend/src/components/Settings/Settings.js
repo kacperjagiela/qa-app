@@ -7,20 +7,21 @@ const { Content, Footer } = Layout; // eslint-disable-line no-unused-vars
 
 const cookies = new Cookies();
 
-export default class Home extends React.Component{
-	render(){
-		if(cookies.get("login")){
-			return(
-				<Layout style={{minHeight:"100vh"}}>
-					<Content>
-						<h1>Settings content</h1>
-					</Content>
-				</Layout>
-			);
-		}else{
-			this.props.history.push("/home");
-			return null;
-		}
-		
-	}
+export default class Home extends React.Component {
+  // move cookies handler somewhere else as stated before
+  // same story with render as in AppWrapper.js
+  render() {
+    if (cookies.get("login")) {
+      return (
+        <Layout style={{ minHeight: "100vh" }}>
+          <Content>
+            <h1>Settings content</h1>
+          </Content>
+        </Layout>
+      );
+    } else {
+      this.props.history.push("/home");
+      return null;
+    }
+  }
 }
