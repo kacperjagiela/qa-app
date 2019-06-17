@@ -1,44 +1,39 @@
-import * as React from "react";
-import { Layout, Menu, Icon } from "antd"; // eslint-disable-line no-unused-vars
-import { Link } from "react-router-dom"; // eslint-disable-line no-unused-vars
+import * as React from 'react';
+import { Layout, Menu, Icon } from 'antd';
+import { Link } from 'react-router-dom';
 
-const {Sider} = Layout; // eslint-disable-line no-unused-vars
+const NavigationSider = ({ selected, handleChange, login }) => (
+	<Layout.Sider
+		breakpoint='lg'
+		collapsedWidth='0'
+	>
+		<Menu theme='light' mode='inline' defaultSelectedKeys={selected.split('')} style={{ height: '100%' }}>
+			<Menu.Item key='1' onClick={e => handleChange(e)}>
+				<Link to='/home'>
+					<Icon type='home' />
+					<span className='nav-text'>Home</span>
+				</Link>
+			</Menu.Item>
+			<Menu.Item key='2' onClick={e => handleChange(e)}>
+				<Link to={`/profile/${login}`}>
+					<Icon type='profile' />
+					<span className='nav-text'>Your profile</span>
+				</Link>
+			</Menu.Item>
+			<Menu.Item key='3' onClick={e => handleChange(e)}>
+				<Link to='/settings'>
+					<Icon type='setting' />
+					<span className='nav-text'>Settings</span>
+				</Link>
+			</Menu.Item>
+			<Menu.Item key='4' onClick={e => handleChange(e)}>
+				<Link to='/logout'>
+					<Icon type='logout' />
+					<span className='nav-text'>Log out</span>
+				</Link>
+			</Menu.Item>
+		</Menu>
+	</Layout.Sider>
+);
 
-export default class NavigationSider extends React.Component{
-	render(){
-		return(
-			<Sider 
-				breakpoint="lg" 
-				collapsedWidth="0" 
-			>
-				{/* Logo here */}
-				<Menu theme="light" mode="inline" defaultSelectedKeys={this.props.selected.split("")} style={{height:"100%"}}>
-					<Menu.Item key="1" onClick={e=>this.props.handleChange(e)}>
-						<Link to="/home">
-							<Icon type="home"/>
-							<span className="nav-text">Home</span>
-						</Link>
-					</Menu.Item>
-					<Menu.Item key="2" onClick={e=>this.props.handleChange(e)}>
-						<Link to={`/profile/${this.props.login}`}>
-							<Icon type="profile"/>
-							<span className="nav-text">Your profile</span>
-						</Link>
-					</Menu.Item>
-					<Menu.Item key="3" onClick={e=>this.props.handleChange(e)}>
-						<Link to="/settings">
-							<Icon type="setting"/>
-							<span className="nav-text">Settings</span>
-						</Link>
-					</Menu.Item>
-					<Menu.Item key="4" onClick={e=>this.props.handleChange(e)}>
-						<Link to="/logout">
-							<Icon type="logout"/>
-							<span className="nav-text">Log out</span>
-						</Link>
-					</Menu.Item>
-				</Menu>
-			</Sider>
-		);
-	}
-}
+export default NavigationSider;

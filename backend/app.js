@@ -6,7 +6,7 @@ const postController = require("./controllers/post/controller.js");
 
 const multer = require("multer");
 const database = require("./database/database.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const upload = multer();
 const db = new database();

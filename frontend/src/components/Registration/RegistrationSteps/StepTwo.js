@@ -1,95 +1,93 @@
-import * as React from "react";
-import { Typography, Form, Icon, Input, Button } from "antd"; // eslint-disable-line no-unused-vars
-const { Title } = Typography; // eslint-disable-line no-unused-vars
-import {FadeInRight} from "../../Styles"; // eslint-disable-line no-unused-vars
+import * as React from 'react';
+import {
+	Typography, Form, Icon, Input, Button,
+} from 'antd';
+import { FadeInRight } from '../../Styles';
 
-const FormItem = Form.Item; // eslint-disable-line no-unused-vars
+const { Title } = Typography;
+const FormItem = Form.Item;
 
-class StepTwoForm extends React.Component{
-	constructor(props){
+class StepTwoForm extends React.Component {
+	constructor(props) {
 		super(props);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.checkPassword = this.checkPassword.bind(this);
-		this.checkConfirm = this.checkConfirm.bind(this);
-		this.handleConfirmBlur = this.handleConfirmBlur.bind(this);
 		this.state = {
-			confirmDirty: false
+			confirmDirty: false,
 		};
 	}
 
-	checkPassword(rule, value, callback){
-		const form = this.props.form;
-		if (value && this.state.confirmDirty) {
-			form.validateFields(["confirm"], { force: true });
+	checkPassword = (rule, value, callback) => {
+		const { form } = this.props;
+		const { confirmDirty } = this.state;
+		if (value && confirmDirty) {
+			form.validateFields(['confirm'], { force: true });
 		}
 		callback();
 	}
-	checkConfirm(rule, value, callback){
-		const form = this.props.form;
-		if (value && value !== form.getFieldValue("password")) {
-			callback("Two passwords that you enter is inconsistent!");
-		}else {
-			callback();
+
+	checkConfirm = (rule, value, callback) => {
+		const { form } = this.props;
+		if (value && value !== form.getFieldValue('password')) {
+			callback('Two passwords that you enter is inconsistent!');
 		}
+		callback();
 	}
 
-	handleConfirmBlur(e){
-		const value = e.target.value;
-		this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+	handleConfirmBlur = (e) => {
+		const { value } = e.target.value;
+		const { confirmDirty } = this.state;
+		this.setState({ confirmDirty: confirmDirty || !!value });
 	}
 
-	handleSubmit(e){
+	handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.form.validateFields(err=>{
-			if(!err){
-				this.props.nextStep(e);
+		const { form, nextStep } = this.props;
+		form.validateFields((err) => {
+			if (!err) {
+				nextStep(e);
 			}
 		});
 	}
 
-	render(){
-		const { getFieldDecorator } = this.props.form;
-		return(
+	render() {
+		const { form, onChange, prevStep } = this.props;
+		return (
 			<FadeInRight>
 				<Form onSubmit={this.handleSubmit}>
 					<Title>Just a little bit more!</Title>
 					<Title level={3}>Please enter your username and password.</Title>
-
-					<FormItem label="Username" hasFeedback>
-						{getFieldDecorator("userName", {
-							rules:[{
-								required: true, message: "Please enter your username!" 
-							}]
+					<FormItem label='Username' hasFeedback>
+						{form.getFieldDecorator('userName', {
+							rules: [{
+								required: true, message: 'Please enter your username!',
+							}],
 						})(
-							<Input prefix={<Icon type="user" />} style={{width:"50%"}} placeholder="Username" onChange={e=>this.props.onChange(e, "username")}/>
+							<Input prefix={<Icon type='user' />} style={{ width: '50%' }} placeholder='Username' onChange={e => onChange(e, 'username')} />,
 						)}
 					</FormItem>
-
-					<FormItem label="Password" hasFeedback>
-						{getFieldDecorator("password", {
-							rules:[{
-								required:true, message: "Please enter your password!"
+					<FormItem label='Password' hasFeedback>
+						{form.getFieldDecorator('password', {
+							rules: [{
+								required: true, message: 'Please enter your password!',
 							}, {
 								validator: this.checkPassword,
-							}]
+							}],
 						})(
-							<Input prefix={<Icon type="lock"/>} type="password" style={{width:"50%"}} placeholder="Password" onChange={e=>this.props.onChange(e, "password")}/>
+							<Input prefix={<Icon type='lock' />} type='password' style={{ width: '50%' }} placeholder='Password' onChange={e => onChange(e, 'password')} />,
 						)}
 					</FormItem>
-
-					<FormItem label="Confirm Password" hasFeedback>
-						{getFieldDecorator("confirm", {
+					<FormItem label='Confirm Password' hasFeedback>
+						{form.getFieldDecorator('confirm', {
 							rules: [{
-								required: true, message: "Please confirm your password!",
+								required: true, message: 'Please confirm your password!',
 							}, {
 								validator: this.checkConfirm,
 							}],
 						})(
-							<Input prefix={<Icon type="lock"/>} type="password" style={{width:"50%"}} placeholder="Confirm password" onBlur={this.handleConfirmBlur}/>
+							<Input prefix={<Icon type='lock' />} type='password' style={{ width: '50%' }} placeholder='Confirm password' onBlur={this.handleConfirmBlur} />,
 						)}
 					</FormItem>
-					<Button onClick={this.props.prevStep}>Previous</Button>
-					<Button type="primary" htmlType="submit">Next</Button>
+					<Button onClick={prevStep}>Previous</Button>
+					<Button type='primary' htmlType='submit'>Next</Button>
 				</Form>
 			</FadeInRight>
 		);
