@@ -25,22 +25,23 @@ export default class AppWrapper extends React.Component {
 
 	render() {
 		const { login, current } = this.state;
-		if (login) {
-			return (
-				<Layout style={{ minHeight: '100vh', maxHeight: '100vh' }}>
-					<NavigationSider
-						handleChange={this.handleChange}
-						selected={current.toString()}
-						login={login}
-					/>
-					<Switcher refresh={this.refresh} />
-				</Layout>
-			);
-		}
-		return (
+		const LoggedIn = () => (
+			<Layout style={{ minHeight: '100vh', maxHeight: '100vh' }}>
+				<NavigationSider
+					handleChange={this.handleChange}
+					selected={current.toString()}
+					login={login}
+				/>
+				<Switcher refresh={this.refresh} />
+			</Layout>
+		);
+		const NotLoggedIn = () => (
 			<Layout style={{ minHeight: '100vh', maxHeight: '100vh' }}>
 				<Switcher refresh={this.refresh} />
 			</Layout>
+		);
+		return (
+			login ? <LoggedIn /> : <NotLoggedIn />
 		);
 	}
 }

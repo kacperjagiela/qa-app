@@ -2,7 +2,7 @@ import * as React from 'react';
 import './Registration.css';
 import { Steps, Alert } from 'antd';
 import { Cookies } from 'react-cookie';
-import axios from 'axios';
+import { register } from '../Reusable/services';
 import StepOne from './RegistrationSteps/StepOne';
 import StepTwo from './RegistrationSteps/StepTwo';
 import StepThree from './RegistrationSteps/StepThree';
@@ -11,19 +11,16 @@ const { Step } = Steps;
 const cookie = new Cookies();
 
 class Registration extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			step: 0,
-			email: '',
-			username: '',
-			password: '',
-			// profilepicture: '',
-			// description: '',
-			visible: false,
-			valid: true,
-		};
-	}
+	state = {
+		step: 0,
+		email: '',
+		username: '',
+		password: '',
+		// profilepicture: '',
+		// description: '',
+		visible: false,
+		valid: true,
+	};
 
 	// Save input value to state key declared on lower component
 	saveInput = (e, key) => {
@@ -49,13 +46,16 @@ class Registration extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		axios.post('http://192.168.8.192:8080/register', { data: this.state })
+		const { state } = this;
+		register(state)
 			.then((res) => {
-				if (res.data === 'Created user') {
+				if (res.data) {
 					this.setState({ visible: true });
+				} else {
+					this.setState({ valid: false });
 				}
-				this.setState({ valid: false });
-			});
+			})
+			.catch(err => err);
 	}
 
 	handleClose = () => {
@@ -96,11 +96,11 @@ class Registration extends React.Component {
 				/>,
 			},
 		];
-		if (cookie.get('login')) {
+		const LoggedIn = () => {
 			history.push('home');
 			return null;
-		}
-		return (
+		};
+		const NotLoggedIn = () => (
 			<div className='registration'>
 				{visible ? (
 					<Alert
@@ -131,6 +131,9 @@ class Registration extends React.Component {
 				</Steps>
 				<div className='steps-content'>{steps[step].content}</div>
 			</div>
+		);
+		return (
+			cookie.get('login') ? <LoggedIn /> : <NotLoggedIn />
 		);
 	}
 }

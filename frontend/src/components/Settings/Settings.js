@@ -7,20 +7,23 @@ const { Content, Footer } = Layout;
 const cookies = new Cookies();
 
 const Settings = ({ history }) => {
-	if (cookies.get('login')) {
-		return (
-			<Layout style={{ minHeight: '100vh' }}>
-				<Content>
-					<h1>Settings content</h1>
-				</Content>
-				<Footer>
-					Created by Kacper Jagieła
-				</Footer>
-			</Layout>
-		);
-	}
-	history.push('/home');
-	return null;
+	const LoggedIn = () => (
+		<Layout style={{ minHeight: '100vh' }}>
+			<Content>
+				<h1>Settings content</h1>
+			</Content>
+			<Footer>
+				Created by Kacper Jagieła
+			</Footer>
+		</Layout>
+	);
+	const NotLoggedIn = () => {
+		history.push('/home');
+		return null;
+	};
+	return (
+		cookies.get('login') ? <LoggedIn /> : <NotLoggedIn />
+	);
 };
 
 export default Settings;

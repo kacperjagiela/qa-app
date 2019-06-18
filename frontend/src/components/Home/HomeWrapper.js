@@ -7,29 +7,21 @@ import WelcomePage from '../WelcomePage/WelcomePage';
 const cookies = new Cookies();
 
 class HomeWrapper extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			login: cookies.get('login'),
-		};
-	}
-
-	componentDidMount() {
-		const { location, refresh } = this.props;
-		if (location.state) {
-			refresh();
-		}
-	}
+	state = {
+		login: cookies.get('login'),
+	};
 
 	render() {
 		const { login } = this.state;
 		const { refresh } = this.props;
-		if (login) {
-			return (
-				<Home login={login} refresh={refresh} />
-			);
-		} return (
+		const LoggedIn = () => (
+			<Home login={login} refresh={refresh} />
+		);
+		const NotLoggedIn = () => (
 			<WelcomePage refresh={refresh} />
+		);
+		return (
+			login ? <LoggedIn /> : <NotLoggedIn />
 		);
 	}
 }

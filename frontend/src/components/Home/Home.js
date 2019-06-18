@@ -7,9 +7,9 @@ export default class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		const { refresh } = this.props;
-		if (refresh) {
-			refresh();
-		}
+		// if (refresh) {
+		// 	refresh();
+		// }
 	}
 
 	render() {

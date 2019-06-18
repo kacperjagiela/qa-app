@@ -3,9 +3,9 @@ import './Login.css';
 import {
 	Form, Icon, Input, Button, Checkbox, Typography,
 } from 'antd';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
+import { login } from '../Reusable/services';
 
 const cookie = new Cookies();
 
@@ -15,7 +15,7 @@ class LoginForm extends React.Component {
 		const { form, history } = this.props;
 		form.validateFields((err, values) => {
 			if (!err) {
-				axios.post('http://192.168.8.192:8080/login', values, { withCredentials: true })
+				login(values)
 					.then((res) => {
 						if (res.data === 'Logged in') {
 							history.push('/home');
@@ -28,10 +28,11 @@ class LoginForm extends React.Component {
 
 	render() {
 		const { form, history } = this.props;
-		if (cookie.get('login')) {
+		const LoggedIn = () => {
 			history.push('/home');
 			return null;
-		} return (
+		};
+		const NotLoggedIn = () => (
 			<div className='login'>
 				<Form onSubmit={this.handleSubmit} className='login-form'>
 					<Typography.Title type={2}>Welcome back!</Typography.Title>
@@ -66,6 +67,9 @@ class LoginForm extends React.Component {
 					</Form.Item>
 				</Form>
 			</div>
+		);
+		return (
+			cookie.get('login') ? <LoggedIn /> : <NotLoggedIn />
 		);
 	}
 }
