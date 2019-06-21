@@ -6,7 +6,7 @@ const cookies = new Cookies();
 
 const Logout = ({ history }) => {
 	if (cookies.get('login') && cookies.remove('login')) {
-		history.push('/', { a: 'b' });
+		history.push('/', { refresh: true });
 		return null;
 	}
 	return <Redirect to='/' />;

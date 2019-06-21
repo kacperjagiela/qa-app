@@ -10,6 +10,13 @@ import { login } from '../Reusable/services';
 const cookie = new Cookies();
 
 class LoginForm extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			logged: cookie.get('login'),
+		};
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		const { form, history } = this.props;
@@ -18,7 +25,7 @@ class LoginForm extends React.Component {
 				login(values)
 					.then((res) => {
 						if (res.data === 'Logged in') {
-							history.push('/home');
+							history.push('/home', { refresh: true });
 						}
 					})
 					.catch(error => (error));
@@ -27,12 +34,13 @@ class LoginForm extends React.Component {
 	}
 
 	render() {
+		const { logged } = this.state;
 		const { form, history } = this.props;
-		const LoggedIn = () => {
-			history.push('/home');
-			return null;
-		};
-		const NotLoggedIn = () => (
+		if (logged) {
+			history.push('/', { refresh: true });
+			return (null);
+		}
+		return (
 			<div className='login'>
 				<Form onSubmit={this.handleSubmit} className='login-form'>
 					<Typography.Title type={2}>Welcome back!</Typography.Title>
@@ -56,20 +64,17 @@ class LoginForm extends React.Component {
 							initialValue: true,
 						})(<Checkbox>Remember me</Checkbox>)}
 						<a className='login-form-forgot' href='/forgot'>
-							Forgot password
+									Forgot password
 						</a>
 						<br />
 						<Button type='primary' htmlType='submit' className='login-form-button'>
-							Log in
+									Log in
 						</Button>
-						Or
+								Or
 						<a href='/register'> register now!</a>
 					</Form.Item>
 				</Form>
 			</div>
-		);
-		return (
-			cookie.get('login') ? <LoggedIn /> : <NotLoggedIn />
 		);
 	}
 }

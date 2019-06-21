@@ -11,14 +11,22 @@ class HomeWrapper extends React.Component {
 		login: cookies.get('login'),
 	};
 
+	componentDidMount() {
+		const { history, refresh } = this.props;
+		if (history.action === 'REPLACE') {
+			history.action = 'PUT';
+			refresh();
+		}
+	}
+
 	render() {
 		const { login } = this.state;
-		const { refresh } = this.props;
+		const { refresh, history } = this.props;
 		const LoggedIn = () => (
-			<Home login={login} refresh={refresh} />
+			<Home login={login} refresh={refresh} history={history} />
 		);
 		const NotLoggedIn = () => (
-			<WelcomePage refresh={refresh} />
+			<WelcomePage refresh={refresh} history={history} />
 		);
 		return (
 			login ? <LoggedIn /> : <NotLoggedIn />

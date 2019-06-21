@@ -91,7 +91,7 @@ class Registration extends React.Component {
 			},
 		];
 		const LoggedIn = () => {
-			history.push('home');
+			history.push('home', { refresh: true });
 			return null;
 		};
 		const NotLoggedIn = () => (

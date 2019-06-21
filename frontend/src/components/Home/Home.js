@@ -6,10 +6,11 @@ const { Content, Footer } = Layout;
 export default class Home extends React.Component {
 	constructor(props) {
 		super(props);
-		const { refresh } = this.props;
-		// if (refresh) {
-		// 	refresh();
-		// }
+		const { refresh, history } = this.props;
+		if (history.location.state) {
+			refresh();
+			history.location.state = undefined;
+		}
 	}
 
 	render() {

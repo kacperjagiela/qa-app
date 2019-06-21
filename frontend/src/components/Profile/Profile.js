@@ -43,7 +43,7 @@ export default class Profile extends React.Component {
 					width: '80vw', paddingLeft: '10vw', height: '95vh', paddingTop: '5vh',
 				}}
 				>
-					<a href='https://placeholder.com' style={{ float: 'left', marginRight: '10px' }}><Profilepic src='https://via.placeholder.com/100x100' alt='100x100' /></a>
+					<a href='https://placeholder.com' style={{ float: 'left', marginRight: '10px' }}><Profilepic src={`http://192.168.8.192:8080/public/${username}`} alt='100x100' /></a>
 					<Title level={2}>{username}</Title>
 					<Paragraph strong>{description}</Paragraph>
 					<div>
@@ -54,7 +54,7 @@ export default class Profile extends React.Component {
 			</Layout>
 		);
 		const NotLoggedIn = () => {
-			history.push('/home');
+			history.push('/home', { refresh: true });
 			return null;
 		};
 		return (
