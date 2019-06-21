@@ -8,7 +8,16 @@ const multer = require("multer");
 const database = require("./database/database.js");
 const bcrypt = require("bcryptjs");
 
-const upload = multer();
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'public');
+	},
+	filename: (req, file, cb) => {
+		cb(null, req.body.username);
+	}
+});
+
+const upload = multer({ storage: storage });
 const db = new database();
 
 //Enable CORS, body-parser, cookie-parser

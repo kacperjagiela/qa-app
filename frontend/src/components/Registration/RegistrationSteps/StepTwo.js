@@ -40,28 +40,32 @@ class StepTwoForm extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const { form, nextStep } = this.props;
-		form.validateFields((err) => {
+		const { form, nextStep, saveInput } = this.props;
+		form.validateFields((err, values) => {
 			if (!err) {
+				saveInput({
+					username: values.username,
+					password: values.password,
+				});
 				nextStep(e);
 			}
 		});
 	}
 
 	render() {
-		const { form, onChange, prevStep } = this.props;
+		const { form, prevStep } = this.props;
 		return (
 			<FadeInRight>
 				<Form onSubmit={this.handleSubmit}>
 					<Title>Just a little bit more!</Title>
 					<Title level={3}>Please enter your username and password.</Title>
 					<FormItem label='Username' hasFeedback>
-						{form.getFieldDecorator('userName', {
+						{form.getFieldDecorator('username', {
 							rules: [{
 								required: true, message: 'Please enter your username!',
 							}],
 						})(
-							<Input prefix={<Icon type='user' />} style={{ width: '50%' }} placeholder='Username' onChange={e => onChange(e, 'username')} />,
+							<Input prefix={<Icon type='user' />} style={{ width: '50%' }} placeholder='Username' />,
 						)}
 					</FormItem>
 					<FormItem label='Password' hasFeedback>
@@ -72,7 +76,7 @@ class StepTwoForm extends React.Component {
 								validator: this.checkPassword,
 							}],
 						})(
-							<Input prefix={<Icon type='lock' />} type='password' style={{ width: '50%' }} placeholder='Password' onChange={e => onChange(e, 'password')} />,
+							<Input prefix={<Icon type='lock' />} type='password' style={{ width: '50%' }} placeholder='Password' />,
 						)}
 					</FormItem>
 					<FormItem label='Confirm Password' hasFeedback>

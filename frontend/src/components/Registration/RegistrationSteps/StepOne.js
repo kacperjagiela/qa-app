@@ -11,16 +11,17 @@ const FormItem = Form.Item;
 class StepOneForm extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const { form, nextStep } = this.props;
-		form.validateFields((err) => {
+		const { form, nextStep, saveInput } = this.props;
+		form.validateFields((err, value) => {
 			if (!err) {
+				saveInput({ email: value });
 				nextStep(e);
 			}
 		});
 	}
 
 	render() {
-		const { form, onChange } = this.props;
+		const { form } = this.props;
 		return (
 			<FadeInRight>
 				<Form onSubmit={this.handleSubmit}>
@@ -35,7 +36,7 @@ class StepOneForm extends React.Component {
 								type: 'email', message: 'The input is not valid E-mail!',
 							}],
 						})(
-							<Input prefix={<Icon type='mail' />} style={{ width: '50%' }} placeholder='Email' onChange={e => onChange(e, 'email')} />,
+							<Input prefix={<Icon type='mail' />} style={{ width: '50%' }} placeholder='Email' />,
 						)}
 					</FormItem>
 					<Button type='primary' htmlType='submit'>Next</Button>

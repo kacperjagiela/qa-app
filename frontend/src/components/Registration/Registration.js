@@ -13,18 +13,14 @@ const cookie = new Cookies();
 class Registration extends React.Component {
 	state = {
 		step: 0,
-		email: '',
 		username: '',
-		password: '',
-		// profilepicture: '',
-		// description: '',
 		visible: false,
 		valid: true,
 	};
 
 	// Save input value to state key declared on lower component
-	saveInput = (e, key) => {
-		this.setState({ [key]: e.target.value });
+	saveInput = (state) => {
+		this.setState(state);
 	}
 
 	// Progress into registration
@@ -65,24 +61,21 @@ class Registration extends React.Component {
 
 	render() {
 		const {
-			username, password, email, visible, valid, step,
+			visible, valid, step, username,
 		} = this.state;
 		const { history } = this.props;
 		const steps = [
 			{
 				title: 'Email',
 				content: <StepOne
-					onChange={this.saveInput}
-					value={email}
+					saveInput={this.saveInput}
 					nextStep={this.nextStep}
 				/>,
 			},
 			{
 				title: 'Username and Password',
 				content: <StepTwo
-					onChange={this.saveInput}
-					username={username}
-					password={password}
+					saveInput={this.saveInput}
 					prevStep={this.prevStep}
 					nextStep={this.nextStep}
 				/>,
@@ -90,8 +83,9 @@ class Registration extends React.Component {
 			{
 				title: 'Description',
 				content: <StepThree
-					onChange={this.saveInput}
+					saveInput={this.saveInput}
 					prevStep={this.prevStep}
+					username={username}
 					onSubmit={e => this.handleSubmit(e)}
 				/>,
 			},

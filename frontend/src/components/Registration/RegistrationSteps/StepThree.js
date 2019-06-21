@@ -10,27 +10,25 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 
 class StepThreeForm extends React.Component {
-	normFile = (e) => {
-		if (Array.isArray(e)) {
-			return e;
-		}
-		return e && e.fileList;
-	}
-
-	// TODO: upload file
-	postFile = (e) => {
+	handleUpload = ({ file, onSuccess }) => {
+		const { username } = this.props;
 		const formData = new FormData();
-		formData.append('file', e.file);
+		formData.append('username', username);
+		formData.append('file', file);
 		axios.post('http://192.168.8.192:8080/add-file', formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data',
 			},
+		}).then(() => {
+			onSuccess('ok');
+		}).catch((err) => {
+			console.error(err);
 		});
 	}
 
 	render() {
 		const {
-			form, onSubmit, onChange, prevStep,
+			onSubmit, prevStep,
 		} = this.props;
 		return (
 			<FadeInRight>
@@ -39,22 +37,16 @@ class StepThreeForm extends React.Component {
 					<Title level={3}>Add something from yourself!</Title>
 					<Paragraph>(optional, can be changed later)</Paragraph>
 					<FormItem label='Description' hasFeedback>
-						<TextArea prefix={<Icon type='idcard' />} style={{ width: '50%' }} placeholder='Description' onChange={e => onChange(e, 'description')} autosize />
+						<TextArea prefix={<Icon type='idcard' />} style={{ width: '50%' }} placeholder='Description' autosize />
 					</FormItem>
 					<FormItem label='Add profile picture'>
 						<div className='dropbox' style={{ width: '50%', margin: 'auto' }}>
-							{form.getFieldDecorator('dragger', {
-								valuePropName: 'fileList',
-								getValueFromEvent: this.normFile,
-							})(
-								<Upload.Dragger name='file' multiple={false} action='http://192.168.8.192:8080/add-file'>
-									<p className='ant-upload-drag-icon'>
-										<Icon type='inbox' />
-									</p>
-									<p className='ant-upload-text'>Click or drag file to this area to upload</p>
-									<p className='ant-upload-hint'>Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
-								</Upload.Dragger>,
-							)}
+							<Upload customRequest={this.handleUpload}>
+								<Button>
+									<Icon type="upload" />
+									Select File
+								</Button>
+							</Upload>
 						</div>
 					</FormItem>
 					<Button onClick={prevStep}>Previous</Button>
