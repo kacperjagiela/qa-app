@@ -1,8 +1,8 @@
-const app = require("express")();
+const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const getController = require("./controllers/get/controller.js");
-const postController = require("./controllers/post/controller.js");
+const getController = require("./controllers/get.js");
+const postController = require("./controllers/post.js");
 
 const multer = require("multer");
 const database = require("./database/database.js");
@@ -19,9 +19,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 const db = new database();
+const app = express();
 
 //Enable CORS, body-parser, cookie-parser
 app.use(cookieParser(), bodyParser.urlencoded({extended:true}), bodyParser.json());
+app.use("/public", express.static('public'));
 app.use((request, response, next) => {
     response.header("Access-Control-Allow-Origin", "http://192.168.8.192:3000");
     response.header(
