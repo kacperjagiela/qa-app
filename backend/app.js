@@ -5,8 +5,7 @@ const getController = require("./controllers/get.js");
 const postController = require("./controllers/post.js");
 
 const multer = require("multer");
-const database = require("./database/database.js");
-const bcrypt = require("bcryptjs");
+const Database = require("./database/database.js");
 
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -18,7 +17,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-const db = new database();
+const db = new Database();
 const app = express();
 
 //Enable CORS, body-parser, cookie-parser
@@ -36,6 +35,6 @@ app.use((request, response, next) => {
 
 //Initialize controllers
 getController(app,db);
-postController(app, bcrypt, upload, db);
+postController(app, upload, db);
 
 app.listen(8080, "192.168.8.192", ()=>console.log("Listening on 8080.."));

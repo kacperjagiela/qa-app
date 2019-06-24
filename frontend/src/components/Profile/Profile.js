@@ -20,7 +20,6 @@ export default class Profile extends React.Component {
 		axios.get(`http://192.168.8.192:8080/profile/${match.params.username}`)
 			.then((res) => {
 				this.setState({
-					// id: res.data.id,
 					username: res.data.username,
 					// email: res.data.email,
 					description: res.data.description,

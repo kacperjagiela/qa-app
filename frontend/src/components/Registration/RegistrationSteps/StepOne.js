@@ -14,7 +14,7 @@ class StepOneForm extends React.Component {
 		const { form, nextStep, saveInput } = this.props;
 		form.validateFields((err, value) => {
 			if (!err) {
-				saveInput({ email: value });
+				saveInput({ email: value.email });
 				nextStep(e);
 			}
 		});
