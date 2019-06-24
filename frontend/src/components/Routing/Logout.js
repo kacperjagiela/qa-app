@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
+import { getCookie, deleteCookie } from '../Reusable/cookies';
 
-const cookies = new Cookies();
 
 const Logout = ({ history }) => {
-	if (cookies.get('login') && cookies.remove('login')) {
+	if (getCookie.get('login') && deleteCookie.remove('login')) {
 		history.push('/', { refresh: true });
 		return null;
 	}

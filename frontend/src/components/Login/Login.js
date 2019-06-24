@@ -1,19 +1,17 @@
 import * as React from 'react';
-import './Login.css';
 import {
 	Form, Icon, Input, Button, Checkbox, Typography,
 } from 'antd';
 import { withRouter } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
+import { LoginDiv } from '../Styles';
+import { getCookie } from '../Reusable/cookies';
 import { login } from '../Reusable/services';
-
-const cookie = new Cookies();
 
 class LoginForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			logged: cookie.get('login'),
+			logged: getCookie('login'),
 		};
 	}
 
@@ -41,7 +39,7 @@ class LoginForm extends React.Component {
 			return (null);
 		}
 		return (
-			<div className='login'>
+			<LoginDiv>
 				<Form onSubmit={this.handleSubmit} className='login-form'>
 					<Typography.Title type={2}>Welcome back!</Typography.Title>
 					<Form.Item>
@@ -67,14 +65,14 @@ class LoginForm extends React.Component {
 									Forgot password
 						</a>
 						<br />
-						<Button type='primary' htmlType='submit' className='login-form-button'>
+						<Button type='primary' htmlType='submit' style={{ width: '100%' }}>
 									Log in
 						</Button>
 								Or
 						<a href='/register'> register now!</a>
 					</Form.Item>
 				</Form>
-			</div>
+			</LoginDiv>
 		);
 	}
 }

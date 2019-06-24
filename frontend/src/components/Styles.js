@@ -21,3 +21,42 @@ height:150px;
 width:100px;
 height:100px;
 }`;
+
+export const Register = styled.div`
+font-family: 'Roboto', sans-serif;
+width:80vw;
+height:100vh;
+margin-left:10vw;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+@media screen and (max-width:768px){
+padding-top:2vh;
+width:100vw;
+margin-left: 0;
+}
+`;
+
+export const Welcome = styled.div`
+font-family: 'Roboto', sans-serif;
+width:100vw;
+height:100vh;
+display:flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+`;
+
+export const LoginDiv = styled.div`
+font-family: 'Roboto', sans-serif;
+width:100vw;
+height: 100vh;
+background-color:transparent;
+text-align:center;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+`;

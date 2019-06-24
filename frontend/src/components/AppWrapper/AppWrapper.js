@@ -1,16 +1,14 @@
 import * as React from 'react';
-import { Layout, Menu, Icon } from 'antd'; // eslint-disable-line no-unused-vars
-import { Cookies } from 'react-cookie';
+import { Layout } from 'antd'; // eslint-disable-line no-unused-vars
 import NavigationSider from '../Reusable/NavigationSider'; // eslint-disable-line no-unused-vars
 import Switcher from '../Routing/Switcher'; // eslint-disable-line no-unused-vars
-
-const cookies = new Cookies();
+import { getCookie } from '../Reusable/cookies';
 
 export default class AppWrapper extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			login: cookies.get('login'),
+			login: getCookie('login'),
 			current: 1,
 		};
 	}
@@ -20,7 +18,7 @@ export default class AppWrapper extends React.Component {
 	}
 
 	refresh = () => {
-		this.setState({ login: cookies.get('login'), current: 1 });
+		this.setState({ login: getCookie('login'), current: 1 });
 	}
 
 	render() {

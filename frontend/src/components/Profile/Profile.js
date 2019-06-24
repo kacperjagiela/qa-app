@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { Layout, Typography } from 'antd';
-import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import { getCookie } from '../Reusable/cookies';
 import { Profilepic } from '../Styles';
 
 const { Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
-const cookie = new Cookies();
 
 export default class Profile extends React.Component {
 	constructor(props) {
@@ -57,7 +56,7 @@ export default class Profile extends React.Component {
 			return null;
 		};
 		return (
-			cookie.get('login') ? <LoggedIn /> : <NotLoggedIn />
+			getCookie('login') ? <LoggedIn /> : <NotLoggedIn />
 		);
 	}
 }
