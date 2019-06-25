@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Layout } from 'antd'; // eslint-disable-line no-unused-vars
-import NavigationSider from '../Reusable/NavigationSider'; // eslint-disable-line no-unused-vars
+import NavigationSider from '../Reusable/Components/NavigationSider'; // eslint-disable-line no-unused-vars
 import Switcher from '../Routing/Switcher'; // eslint-disable-line no-unused-vars
 import { getCookie } from '../Reusable/cookies';
 

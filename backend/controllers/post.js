@@ -28,4 +28,14 @@ module.exports = (app, upload, db) =>{
 			res.send('error')
 		}
 	});
+	// Handle question answer
+	app.post("/answer/:id", (req, res) => {
+		db.answerQuestion(req.params.id, req.body.answer, (err, result) => {
+			if(result){
+				res.send('done');
+			}else{
+				res.send('error');
+			}
+		});
+	})
 }

@@ -31,7 +31,7 @@ class Database {
 	}
 	// Register
 	registerUser(body, callback){
-		this.pool.query(`SELECT * FROM QA_users WHERE username='${body.username}'`, (err, rows, fileds)=>{
+		this.pool.query(`SELECT * FROM QA_users WHERE username='${body.username}'`, (err, rows, fileds) => {
 			if(err) throw err;
 			if(rows[0]){
 				callback(null, false);
@@ -48,7 +48,7 @@ class Database {
 	};
 	// Login
 	loginUser(body, callback){
-		this.pool.query(`SELECT * FROM QA_users WHERE username='${body.username}'`, (err, rows)=>{
+		this.pool.query(`SELECT * FROM QA_users WHERE username='${body.username}'`, (err, rows) => {
 			if(err) throw err;
 			//Check if user with body.username exists
 			if(rows[0]){
@@ -56,6 +56,17 @@ class Database {
 				bcrypt.compare(body.password, rows[0].password, (err, result)=>{
 					callback(null, result);
 				});
+			}else{
+				callback(null, false);
+			}
+		});
+	}
+	// Handle question answer
+	answerQuestion(id, answer, callback){
+		this.pool.query(`UPDATE QA_questions SET answer='${answer}' WHERE id='${id}'`, (err, rows) => {
+			if (err) throw err;
+			if(rows[0]){
+				callback(null, rows[0])
 			}else{
 				callback(null, false);
 			}

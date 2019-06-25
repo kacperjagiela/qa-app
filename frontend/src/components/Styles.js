@@ -13,6 +13,18 @@ paddint-bottom:5vh;
 animation: 1.5s ${keyframes`${fadeInRight}`};
 `;
 
+export const LoginDiv = styled.div`
+font-family: 'Roboto', sans-serif;
+width:100vw;
+height: 100vh;
+background-color:transparent;
+text-align:center;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+`;
+
 export const Profilepic = styled.img`
 width:150px;
 height:150px;
@@ -39,23 +51,25 @@ margin-left: 0;
 }
 `;
 
+export const QuestionDiv = styled.div`
+width:90%;
+padding:10px;
+margin-top:2vh;
+min-height:3vh;
+border: 1px solid red;
+border-radius:5px;
+overflow:auto;
+`;
+
+export const Questions = styled.div`
+width:100%;
+`;
+
 export const Welcome = styled.div`
 font-family: 'Roboto', sans-serif;
 width:100vw;
 height:100vh;
 display:flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-`;
-
-export const LoginDiv = styled.div`
-font-family: 'Roboto', sans-serif;
-width:100vw;
-height: 100vh;
-background-color:transparent;
-text-align:center;
-display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
