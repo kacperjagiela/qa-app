@@ -6,6 +6,7 @@ const NavigationSider = ({ selected, handleChange, login }) => (
 	<Layout.Sider
 		breakpoint='lg'
 		collapsedWidth='0'
+		style={{ zIndex: '1' }}
 	>
 		<Menu theme='light' mode='inline' defaultSelectedKeys={selected.split('')} style={{ height: '100%' }}>
 			<Menu.Item key='1' onClick={e => handleChange(e)}>

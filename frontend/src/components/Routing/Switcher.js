@@ -6,13 +6,15 @@ import HomeWrapper from '../Home/HomeWrapper';
 import Profile from '../Profile/Profile';
 import Settings from '../Settings/Settings';
 import Logout from './Logout';
+import Ask from '../Ask/Ask';
 
 const Switcher = ({ refresh }) => (
 	<Switch>
+		<Route exact path='/ask/:username' component={Ask} />
 		<Route exact path='/settings' component={withRouter(Settings)} />
 		<Route exact path='/profile/:username' component={withRouter(Profile)} />
 		<Route exact path='/register' component={withRouter(Registration)} />
-		<Route exact path='/login' component={withRouter(Login)} />
+		<Route exact path='/login' component={Login} />
 		<Route exact path='/logout' component={withRouter(Logout)} />
 		<Route path='/' render={() => <HomeWrapper refresh={refresh} />} />
 	</Switch>

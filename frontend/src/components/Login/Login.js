@@ -23,7 +23,7 @@ class LoginForm extends React.Component {
 				login(values)
 					.then((res) => {
 						if (res.data === 'Logged in') {
-							history.push('/home', { refresh: true });
+							history.push('/home');
 						}
 					})
 					.catch(error => (error));
@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
 		}
 		return (
 			<LoginDiv>
-				<Form onSubmit={this.handleSubmit} className='login-form'>
+				<Form onSubmit={this.handleSubmit}>
 					<Typography.Title type={2}>Welcome back!</Typography.Title>
 					<Form.Item>
 						{form.getFieldDecorator('username', {

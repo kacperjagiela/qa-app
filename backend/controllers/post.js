@@ -2,40 +2,50 @@ const saltRounds = 10;
 
 module.exports = (app, upload, db) =>{
 	// Register
-	app.post("/register", (req, res)=>{
+	app.post('/register', (req, res)=>{
 		db.registerUser(req.body, (err, result)=>{
 			if (err) throw err;
 			res.send(result);
 		})
 	});
 	// Login
-	app.post("/login", (req, res)=>{
+	app.post('/login', (req, res)=>{
 		db.loginUser(req.body, (err, result) => {
 			if (err) throw err;
 			if (result) {
-				res.cookie("login", req.body.username, {maxAge:9999999, HttpOnly:false}).send("Logged in");
+				res.cookie('login', req.body.username, {maxAge:9999999, HttpOnly:false}).send('Logged in');
 			} else {
-				res.send("Wrong username or password");
+				res.send('Wrong username or password');
 			}
 		})
 	});
 	// Handle file input
-	app.post("/add-file", upload.single("file"), (req, res, next)=>{
+	app.post('/add-file', upload.single('file'), (req, res, next)=>{
 		const file = req.file;
-		if(file){
+		if (file) {
 			res.send('done');
-		}else{
+		} else {
 			res.send('error')
 		}
 	});
 	// Handle question answer
-	app.post("/answer/:id", (req, res) => {
+	app.post('/answer/:id', (req, res) => {
 		db.answerQuestion(req.params.id, req.body.answer, (err, result) => {
-			if(result){
+			if (result) {
 				res.send('done');
-			}else{
+			} else {
 				res.send('error');
 			}
 		});
+	})
+	// Handle question asking
+	app.post('/ask/:username', (req, res) => {
+		db.askQuestion(req.params.username, req.body.question, (err, result) => {
+			if (result) {
+				res.send(true);
+			} else {
+				res.send(false);
+			}
+		})
 	})
 }

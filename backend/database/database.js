@@ -17,7 +17,7 @@ class Database {
 			if (result[0]){
 				callback(null, result[0]);
 			}else{
-				callback("error or no results");
+				callback(null);
 			}
 		});
 	}
@@ -71,6 +71,13 @@ class Database {
 				callback(null, false);
 			}
 		});
+	}
+	// Handle question asking
+	askQuestion(username, question, callback){
+		this.pool.query(`INSERT INTO QA_questions(content, user_id) VALUES ('${question}', (SELECT id FROM QA_users WHERE username='${username}'))`, (err, rows) => {
+			if (err) throw err;
+			callback(null, true);
+		})
 	}
 }
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Input, Button } from 'antd';
 import { answerQuestion } from '../services';
 import { QuestionDiv } from '../../Styles';
+import { getCookie } from '../cookies';
 
 class Question extends React.Component {
 	constructor(props) {
@@ -25,12 +26,12 @@ class Question extends React.Component {
 	}
 
 	render() {
-		const { question } = this.props;
+		const { question, username } = this.props;
 		const { answer } = this.state;
 		return (
 			<QuestionDiv>
 				<p>{question.content}</p>
-				{question.answer
+				{question.answer || username !== getCookie('login')
 					? question.answer
 					: <Input onChange={e => this.onChange(e)} placeholder="Answer" />}
 				{answer && !question.answer

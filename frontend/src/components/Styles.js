@@ -52,13 +52,17 @@ margin-left: 0;
 `;
 
 export const QuestionDiv = styled.div`
-width:90%;
+width:100%;
 padding:10px;
 margin-top:2vh;
 min-height:3vh;
 border: 1px solid red;
 border-radius:5px;
 overflow:auto;
+
+@media screen and (max-width:768px){
+width:100%;
+}
 `;
 
 export const Questions = styled.div`
@@ -74,3 +78,12 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 `;
+
+export const footerStyles = {
+	textAlign: 'center',
+	position: 'relative',
+	bottom: '0px',
+	left: '0px',
+	width: '100%',
+	paddingLeft: '0px',
+};

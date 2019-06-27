@@ -18,7 +18,7 @@ class StepTwoForm extends React.Component {
 	checkPassword = (rule, value, callback) => {
 		const { form } = this.props;
 		const { confirmDirty } = this.state;
-		if (value && confirmDirty) {
+		if (value && confirmDirty && value.length >= 8) {
 			form.validateFields(['confirm'], { force: true });
 		}
 		callback();
@@ -71,7 +71,7 @@ class StepTwoForm extends React.Component {
 					<FormItem label='Password' hasFeedback>
 						{form.getFieldDecorator('password', {
 							rules: [{
-								required: true, message: 'Please enter your password!',
+								required: true, message: 'Please enter your password! (at least 8 characters)', min: 8,
 							}, {
 								validator: this.checkPassword,
 							}],
