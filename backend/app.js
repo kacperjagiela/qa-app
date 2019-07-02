@@ -24,7 +24,7 @@ const app = express();
 app.use(cookieParser(), bodyParser.urlencoded({extended:true}), bodyParser.json());
 app.use("/public", express.static('public'));
 app.use((request, response, next) => {
-    response.header("Access-Control-Allow-Origin", "http://192.168.8.192:3000");
+    response.header("Access-Control-Allow-Origin", "http://127.0.0.1:3000");
     response.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
@@ -37,4 +37,4 @@ app.use((request, response, next) => {
 getController(app,db);
 postController(app, upload, db);
 
-app.listen(8080, "192.168.8.192", ()=>console.log("Listening on 8080.."));
+app.listen(8080, "127.0.0.1", ()=>console.log("Listening on 8080.."));

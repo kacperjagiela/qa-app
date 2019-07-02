@@ -23,7 +23,7 @@ class LoginForm extends React.Component {
 				login(values)
 					.then((res) => {
 						if (res.data === 'Logged in') {
-							history.push('/home');
+							history.push('/home', { refresh: true });
 						}
 					})
 					.catch(error => (error));

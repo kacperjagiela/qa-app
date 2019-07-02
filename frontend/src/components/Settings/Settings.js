@@ -12,7 +12,7 @@ const Settings = ({ history }) => {
 			<Content>
 				<h1>Settings content</h1>
 			</Content>
-			<Footer>
+			<Footer style={{ width: '100%', textAlign: 'center' }}>
 				Created by Kacper Jagieła
 			</Footer>
 		</Layout>

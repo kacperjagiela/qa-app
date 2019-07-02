@@ -9,12 +9,15 @@ const { Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
 
 export default class Profile extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { questions: [] };
-	}
+	state = {
+		questions: [],
+	};
 
 	componentDidMount() {
+		this.refresh();
+	}
+
+	refresh = () => {
 		const { match } = this.props;
 		// Get profile information from backend
 		getUserData(match.params.username)
@@ -55,6 +58,7 @@ export default class Profile extends React.Component {
 						{questions.reverse().map(question => (
 							<Question
 								question={question}
+								refresh={this.refresh}
 								username={username}
 								key={question.id}
 							/>

@@ -20,9 +20,10 @@ class Question extends React.Component {
 	}
 
 	handleAnswer = () => {
-		const { question } = this.props;
+		const { question, refresh } = this.props;
 		const { answer } = this.state;
 		answerQuestion(question.id, answer);
+		refresh();
 	}
 
 	render() {
