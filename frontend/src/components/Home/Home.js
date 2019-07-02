@@ -25,13 +25,16 @@ export default class Home extends React.Component {
 
 	latestQuestions = () => {
 		getLatestQuestions().then((res) => {
-			console.log(res);
+			console.log(res.data);
+			this.setState({
+				questions: res.data.questions,
+				users: res.data.users,
+			});
 		});
 	}
 
 	render() {
 		const { questions, users } = this.state;
-		const { login } = this.props;
 		return (
 			<Layout style={{ minHeight: '100vh' }}>
 				<Content>
@@ -42,8 +45,15 @@ export default class Home extends React.Component {
 						enterButton
 						size='large'
 					/>
-					{ questions.map(question => (
-						<p key={question.id}>h1</p>
+					{ questions.map((question, index) => (
+						question
+							? (
+								<div style={{ border: '1px solid green' }}>
+									<p key={users[index].id}><a href={`/profile/${users[index].username}`}>{users[index].username}</a></p>
+									<p key={question.id}>{question.content}</p>
+								</div>
+							)
+							: null
 					))}
 				</Content>
 				<Footer style={{ width: '100%', textAlign: 'center' }}>

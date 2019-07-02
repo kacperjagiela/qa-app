@@ -14,4 +14,4 @@ export const answerQuestion = (questionID, questionAnswer) => (axios.post(`${ser
 
 export const askQuestion = (username, questionContent) => (axios.post(`${serverIp}/ask/${username}`, { question: questionContent }));
 
-export const getLatestQuestions = () => (axios.post(`${serverIp}/home`, { numberOfUsers: 10, numberOfQuestions: 1 }));
+export const getLatestQuestions = () => (axios.get(`${serverIp}/home`));

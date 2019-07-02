@@ -21,7 +21,7 @@ class HomeWrapper extends React.Component {
 		const { login } = this.state;
 		const { refresh, history } = this.props;
 		const LoggedIn = () => (
-			<Home login={login} refresh={refresh} history={history} />
+			<Home refresh={refresh} history={history} />
 		);
 		const NotLoggedIn = () => (
 			<WelcomePage refresh={refresh} history={history} />

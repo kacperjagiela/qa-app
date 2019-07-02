@@ -1,14 +1,14 @@
-const mysql = require("mysql");
-const bcrypt = require("bcryptjs");
+const mysql = require('mysql');
+const bcrypt = require('bcryptjs');
 
 class Database {
 	constructor(){
 		this.pool = mysql.createPool({
 			connectionLimit: 10,
-			host: "localhost",
-			user: "test",
-			password:"testtest",
-			database: "projects"
+			host: 'localhost',
+			user: 'test',
+			password:'testtest',
+			database: 'projects'
 		});
 	}
 	// Get user data
@@ -36,13 +36,23 @@ class Database {
 		})
 	}
 	// Get latest questions
-	getLatestQuestions(userID, numberOfQuestions, callback) {
+	getLatestQuestions(users, callback) {
 		this.pool.getConnection((err, connection) => {
-			connection.query(`SELECT * FROM QA_questions WHERE user_id=${userID} ORDER BY id DESC LIMIT ${numberOfQuestions}`, (err, result) => {
-				if (result) {
-					callback(null, result)
+			const questions = users.map( async user => {
+				return new Promise((resolve, reject) => {
+					connection.query(`SELECT * FROM QA_questions WHERE user_id=${user.id} AND answer IS NOT NULL ORDER BY id DESC LIMIT 1`, (err, result) => {
+						if (err) reject(err);
+						if (result){
+							resolve(result[0]);
+						}
+					})
+				})
+			})
+			Promise.all(questions).then((complete) => {
+				if (complete) {
+					callback(null, complete);
 				}
-			});
+			})
 			connection.release();
 		});
 	}
@@ -54,6 +64,7 @@ class Database {
 					callback(null, result);
 				}
 			})
+			connection.release();
 		})
 	}
 	// Register

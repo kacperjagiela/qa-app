@@ -47,25 +47,5 @@ module.exports = (app, upload, db) =>{
 				res.send(false);
 			}
 		})
-	})
-	// Get 10 random users
-	app.post('/home', async (req, res) => {
-		console.log(req.body);
-		const questions = [];
-		const users = [];
-		await db.getRandomUsers(req.body.numberOfUsers, (err, result) => {
-			if (err) throw err;
-			result.forEach(user => {
-				users.push(user);
-				db.getLatestQuestions(user.id, req.body.numberOfQuestions, (error, question) => {
-					if (error) throw error;
-					questions.push(question);
-				});
-			});
-		});
-		res.send({
-			questions: questions,
-			users: users
-		});
-	})
+	});
 }
