@@ -51,7 +51,7 @@ module.exports = (app, db)=>{
 	// Get all usernames
 	app.get('/search', (req, res) => {
 		db.getAllUsernames((err, result) => {
-			res.send(result);
+			res.send({ usernames: result });
 		});
 	});
 	// Search for user

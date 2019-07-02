@@ -4,7 +4,6 @@ import { ShortProfile } from '../../Styles';
 
 const ProfileShort = ({ user }) => (
 	<ShortProfile>
-		{console.log(user.username)}
 		<Avatar size='large' src={`http://127.0.0.1:8080/public/${user.username}}`} />
 		<a href={`/profile/${user.username}`}>{user.username}</a>
 	</ShortProfile>
