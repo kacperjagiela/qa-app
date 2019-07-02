@@ -4,7 +4,13 @@ const serverIp = 'http://127.0.0.1:8080';
 
 export const getUserData = username => (axios.get(`${serverIp}/profile/${username}`));
 
+export const searchUser = username => (axios.get(`${serverIp}/search/${username}`));
+
+export const getAllUsernames = () => (axios.get(`${serverIp}/search`));
+
 export const getQuestions = id => (axios.get(`${serverIp}/questions/${id}`));
+
+export const getLatestQuestions = () => (axios.get(`${serverIp}/home`));
 
 export const register = data => (axios.post(`${serverIp}/register`, data));
 
@@ -13,5 +19,3 @@ export const login = data => (axios.post(`${serverIp}/login`, data, { withCreden
 export const answerQuestion = (questionID, questionAnswer) => (axios.post(`${serverIp}/answer/${questionID}`, { answer: questionAnswer }));
 
 export const askQuestion = (username, questionContent) => (axios.post(`${serverIp}/ask/${username}`, { question: questionContent }));
-
-export const getLatestQuestions = () => (axios.get(`${serverIp}/home`));

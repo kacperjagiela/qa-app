@@ -1,9 +1,13 @@
-import { removeCookie } from '../Reusable/cookies';
+import { removeCookie, getCookie } from '../Reusable/cookies';
 
 
 const Logout = ({ history }) => {
-	removeCookie('login');
-	history.push('/', { refresh: true });
+	if (getCookie('login')) {
+		removeCookie('login');
+		history.push('/', { refresh: true });
+	} else {
+		history.push('/', { refresh: true });
+	}
 	return null;
 };
 

@@ -11,6 +11,15 @@ class Database {
 			database: 'projects'
 		});
 	}
+	// Get all usernames
+	getAllUsernames(callback) {
+		this.pool.getConnection((err, connection) => {
+			connection.query('SELECT username FROM QA_users', (err, result) => {
+				if (result) callback (null, result);
+			});
+			connection.release();
+		});
+	}
 	// Get user data
 	getUserData(username, callback) {
 		this.pool.getConnection((err, connection) => {
@@ -60,6 +69,17 @@ class Database {
 	getRandomUsers(numberOfUsers, callback) {
 		this.pool.getConnection((err, connection) => {
 			connection.query(`SELECT * FROM QA_users ORDER BY RAND() LIMIT ${numberOfUsers}`, (err, result) => {
+				if (result) {
+					callback(null, result);
+				}
+			})
+			connection.release();
+		})
+	}
+	// Search user
+	searchUser(username, callback){
+		this.pool.getConnection((err, connection) => {
+			connection.query(`SELECT * FROM QA_users WHERE username LIKE '${username}%'`, (error, result) => {
 				if (result) {
 					callback(null, result);
 				}

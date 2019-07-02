@@ -48,4 +48,17 @@ module.exports = (app, db)=>{
 			}
 		}).catch(err => err);
 	});
+	// Get all usernames
+	app.get('/search', (req, res) => {
+		db.getAllUsernames((err, result) => {
+			res.send(result);
+		});
+	});
+	// Search for user
+	app.get('/search/:username', (req, res) => {
+		db.searchUser(req.params.username, (err, result) => {
+			if (result) res.send(result);
+		})
+	})
+
 }

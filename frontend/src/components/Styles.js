@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { fadeInRight } from 'react-animations';
+import { fadeInRight, fadeInLeft } from 'react-animations';
 
 // move generic styled components to /styles dir
 
@@ -34,6 +34,11 @@ width:100px;
 height:100px;
 }`;
 
+export const RandomQuestions = styled.div`
+width:80%;
+margin-left:10%;
+`;
+
 export const Register = styled.div`
 font-family: 'Roboto', sans-serif;
 width:80vw;
@@ -43,12 +48,23 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+animation: 1.5s ${keyframes`${fadeInLeft}`};
 
 @media screen and (max-width:768px){
 padding-top:2vh;
 width:100vw;
 margin-left: 0;
 }
+`;
+
+export const ShortProfile = styled.div`
+width:80%;
+margin-left:10%;
+`;
+
+export const SearchDiv = styled.div`
+width:80%;
+margin-left:10%;
 `;
 
 export const QuestionDiv = styled.div`
@@ -78,12 +94,3 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 `;
-
-export const footerStyles = {
-	textAlign: 'center',
-	position: 'relative',
-	bottom: '0px',
-	left: '0px',
-	width: '100%',
-	paddingLeft: '0px',
-};

@@ -48,7 +48,7 @@ export default class Profile extends React.Component {
 					width: '100%', height: '95vh', paddingTop: '5vh',
 				}}
 				>
-					<a href='https://placeholder.com' style={{ float: 'left', marginRight: '10px' }}><Profilepic src={`http://192.168.8.192:8080/public/${username}`} alt='100x100' /></a>
+					<a href='https://placeholder.com' style={{ float: 'left', marginRight: '10px' }}><Profilepic src={`http://127.0.0.1:8080/public/${username}`} alt='100x100' /></a>
 					<Title level={2}>{username}</Title>
 					<Paragraph strong>{description}</Paragraph>
 					{getCookie('login') === match.params.username

@@ -7,6 +7,7 @@ import Profile from '../Profile/Profile';
 import Settings from '../Settings/Settings';
 import Logout from './Logout';
 import Ask from '../Ask/Ask';
+import Search from '../Search/Search';
 
 const Switcher = ({ refresh }) => (
 	<Switch>
@@ -16,6 +17,7 @@ const Switcher = ({ refresh }) => (
 		<Route exact path='/register' component={withRouter(Registration)} />
 		<Route exact path='/login' component={Login} />
 		<Route exact path='/logout' component={withRouter(Logout)} />
+		<Route exact path='/search/:search' component={withRouter(Search)} />
 		<Route path='/' render={() => <HomeWrapper refresh={refresh} />} />
 	</Switch>
 );
