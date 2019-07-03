@@ -21,3 +21,11 @@ export const login = data => (axios.post(`${serverIp}/login`, data, { withCreden
 export const answerQuestion = (questionID, questionAnswer) => (axios.post(`${serverIp}/answer/${questionID}`, { answer: questionAnswer }));
 
 export const askQuestion = (username, questionContent, askedBy) => (axios.post(`${serverIp}/ask/${username}`, { question: questionContent, asked: askedBy }));
+
+export const sendFile = (data, username) => (
+	axios.post(`${serverIp}/updatePicture/${username}`, data, {
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		},
+	})
+);

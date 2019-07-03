@@ -70,7 +70,6 @@ export default class Home extends React.Component {
 
 	render() {
 		const { questions, users, allUsers } = this.state;
-		console.log(users);
 		return (
 			<Layout style={{
 				minHeight: '100vh', width: '100%', paddingLeft: '10%', paddingRight: '10%', overflow: 'auto',

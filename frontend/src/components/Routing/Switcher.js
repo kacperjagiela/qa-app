@@ -12,7 +12,7 @@ import Search from '../Search/Search';
 const Switcher = ({ refresh }) => (
 	<Switch>
 		<Route exact path='/ask/:username' component={Ask} />
-		<Route exact path='/settings' component={withRouter(Settings)} />
+		<Route exact path='/settings' component={Settings} />
 		<Route exact path='/profile/:username' component={withRouter(Profile)} />
 		<Route exact path='/register' component={withRouter(Registration)} />
 		<Route exact path='/login' component={Login} />

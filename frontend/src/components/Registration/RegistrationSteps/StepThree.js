@@ -4,6 +4,7 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { FadeInRight } from '../../Styles';
+import { serverIp } from '../../Reusable/services';
 
 const { Title, Paragraph } = Typography;
 const FormItem = Form.Item;
@@ -15,7 +16,7 @@ class StepThreeForm extends React.Component {
 		const formData = new FormData();
 		formData.append('username', username);
 		formData.append('file', file);
-		axios.post('http://192.168.8.192:8080/add-file', formData, {
+		axios.post(`${serverIp}/add-file`, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data',
 			},

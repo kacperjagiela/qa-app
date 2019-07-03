@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import {
-	fadeInRight, zoomIn, slideInRight, slideInDown, fadeIn,
+	fadeInRight, zoomIn, slideInDown, fadeIn,
 } from 'react-animations';
 
 // move generic styled components to /styles dir
@@ -32,9 +32,8 @@ export const Profilepic = styled.img`
 width:150px;
 height:150px;
 border-radius:50%;
-margin-bottom:20px;
 
-@media screen and (max-width:700px){
+@media screen and (max-width:768px){
 	width:100px;
 	height:100px;
 }`;
@@ -82,9 +81,13 @@ overflow:auto;
 
 export const Questions = styled.div`
 width:100%;
-margin-top:80px;
+margin-top:120px;
 border-top: 1px solid #1890ff;
-animation: 1.2s ${keyframes`${slideInRight}`};
+animation: 1.2s ${keyframes`${fadeIn}`};
+
+@media screen and (max-width:768px){
+	margin-top:80px;
+}
 `;
 
 export const Welcome = styled.div`

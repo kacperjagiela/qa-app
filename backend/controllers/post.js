@@ -20,7 +20,7 @@ module.exports = (app, upload, db) =>{
 		})
 	});
 	// Handle file input
-	app.post('/add-file', upload.single('file'), (req, res, next)=>{
+	app.post('/add-file', upload.single('file'), (req, res)=> {
 		const file = req.file;
 		if (file) {
 			res.send('done');
@@ -28,6 +28,15 @@ module.exports = (app, upload, db) =>{
 			res.send('error')
 		}
 	});
+	// Handle profile picture update
+	app.post('/updatePicture/:username', upload.single('file'), (req, res) => {
+		const file = req.file;
+		if (file) {
+			res.send(true);
+		} else {
+			res.send(false);
+		}
+	})
 	// Handle question answer
 	app.post('/answer/:id', (req, res) => {
 		db.answerQuestion(req.params.id, req.body.answer, (err, result) => {

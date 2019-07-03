@@ -3,17 +3,16 @@ import { removeCookie, getCookie } from '../Reusable/cookies';
 
 const Logout = ({ history }) => {
 	const remove = () => (
-		new Promise((resolve, reject) => {
+		new Promise((resolve) => {
 			removeCookie('login');
 			if (getCookie('login') === undefined) {
 				resolve('ok');
-			} else {
-				reject();
 			}
 		})
 	);
 	remove().then((res) => {
-		if (res) {
+		console.log(res);
+		if (res === 'ok') {
 			history.push('/', { refresh: true });
 		} else {
 			history.push('/logout');
