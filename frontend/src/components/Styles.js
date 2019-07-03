@@ -32,16 +32,12 @@ export const Profilepic = styled.img`
 width:150px;
 height:150px;
 border-radius:50%;
+margin-bottom:20px;
 
 @media screen and (max-width:700px){
 	width:100px;
 	height:100px;
 }`;
-
-export const RandomQuestions = styled.div`
-width:80%;
-margin-left:10%;
-`;
 
 export const Register = styled.div`
 font-family: 'Roboto', sans-serif;
@@ -76,8 +72,7 @@ width:100%;
 padding:10px;
 margin-top:2vh;
 min-height:3vh;
-border: 1px solid #1890ff;
-border-radius:5px;
+border-bottom: 1px solid #1890ff;
 overflow:auto;
 
 @media screen and (max-width:768px){
@@ -87,6 +82,8 @@ overflow:auto;
 
 export const Questions = styled.div`
 width:100%;
+margin-top:80px;
+border-top: 1px solid #1890ff;
 animation: 1.2s ${keyframes`${slideInRight}`};
 `;
 

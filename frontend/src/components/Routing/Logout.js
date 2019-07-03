@@ -13,7 +13,11 @@ const Logout = ({ history }) => {
 		})
 	);
 	remove().then((res) => {
-		if (res) history.push('/', { refresh: true });
+		if (res) {
+			history.push('/', { refresh: true });
+		} else {
+			history.push('/logout');
+		}
 	});
 	return null;
 };

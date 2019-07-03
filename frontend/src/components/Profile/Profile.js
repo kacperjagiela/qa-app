@@ -23,7 +23,6 @@ export default class Profile extends React.Component {
 
 	refresh = () => {
 		const { match } = this.props;
-		const { username } = this.state;
 		// Get profile information from backend
 		getUserData(match.params.username)
 			.then((res) => {
@@ -38,7 +37,7 @@ export default class Profile extends React.Component {
 					.then((response) => {
 						this.setState({ questions: response.data });
 					});
-				checkForAvatar(username)
+				checkForAvatar(res.data.username)
 					.then((result) => {
 						this.setState({
 							avatar: result.data,
@@ -69,7 +68,11 @@ export default class Profile extends React.Component {
 						}
 					</a>
 					<Title level={2}>{username}</Title>
-					<Paragraph strong>{description}</Paragraph>
+					{
+						description !== 'undefined'
+							? <Paragraph strong>{description}</Paragraph>
+							: null
+					}
 					{getCookie('login') === match.params.username
 						? null
 						: <Button href={`/ask/${username}`} type='primary'>Ask this user</Button>}

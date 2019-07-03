@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
-	Layout, Input, Typography, AutoComplete, Button, Icon,
+	Layout, Input, Typography, AutoComplete, Button, Icon, Avatar,
 } from 'antd';
-import { getLatestQuestions, getAllUsernames } from '../Reusable/services';
-import { RandomQuestions } from '../Styles';
+import { getLatestQuestions, getAllUsernames, serverIp } from '../Reusable/services';
+import { QuestionDiv, Questions } from '../Styles';
 
 const { Content, Footer } = Layout;
 
@@ -70,8 +70,12 @@ export default class Home extends React.Component {
 
 	render() {
 		const { questions, users, allUsers } = this.state;
+		console.log(users);
 		return (
-			<Layout style={{ minHeight: '100vh' }}>
+			<Layout style={{
+				minHeight: '100vh', width: '100%', paddingLeft: '10%', paddingRight: '10%', overflow: 'auto',
+			}}
+			>
 				<Content style={{ overflow: 'auto' }}>
 					<Typography.Title level={3} style={{ marginTop: '10%', textAlign: 'center' }}>
 						Search for anyone!
@@ -102,21 +106,46 @@ export default class Home extends React.Component {
 							)}
 						/>
 					</AutoComplete>
-					<RandomQuestions>
-						<Typography.Title level={3} style={{ marginTop: '10vh', textAlign: 'center' }}>
-							Some random QA&apos;s
-						</Typography.Title>
-						{ questions.map((question, index) => (
-							question
-								? (
-									<div style={{ border: '1px solid green' }} key={question.id}>
-										<p><a href={`/profile/${users[index].username}`}>{users[index].username}</a></p>
-										<p>{question.content}</p>
-									</div>
-								)
-								: null
-						))}
-					</RandomQuestions>
+					<Typography.Title level={3} style={{ marginTop: '10vh', textAlign: 'center' }}>
+						Some random QA&apos;s
+					</Typography.Title>
+					<Questions>
+						{ questions.map((question) => {
+							if (question) {
+								let currentUsername = '';
+								users.forEach((user) => {
+									if (user.id === question.user_id) {
+										currentUsername = user.username;
+									}
+								});
+								return (
+									<QuestionDiv key={question.id}>
+										<Typography.Paragraph style={{ marginBottom: '0' }}>
+											<a href={`/profile/${question.asked_by}`}>
+												<Avatar icon='user' size='large' src={`${serverIp}/public/${question.asked_by}`} />
+												{` ${question.asked_by} `}
+											</a>
+											asked:
+										</Typography.Paragraph>
+										<Typography.Paragraph style={{ textIndent: '50px' }}>
+											{question.content}
+										</Typography.Paragraph>
+										<Typography.Paragraph style={{ marginBottom: '0' }}>
+											<a href={`/profile/${currentUsername}`}>
+												<Avatar icon='user' size='large' src={`${serverIp}/public/${currentUsername}`} />
+												{` ${currentUsername} `}
+											</a>
+											answered:
+										</Typography.Paragraph>
+										<Typography.Paragraph style={{ textIndent: '50px' }}>
+											{question.answer}
+										</Typography.Paragraph>
+									</QuestionDiv>
+								);
+							}
+							return null;
+						})}
+					</Questions>
 				</Content>
 				<Footer style={{ width: '100%', textAlign: 'center' }}>
 					Created by Kacper Jagieła
