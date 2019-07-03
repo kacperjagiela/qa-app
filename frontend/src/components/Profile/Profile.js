@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { Layout, Typography, Button } from 'antd';
+import {
+	Layout, Typography, Button, Avatar,
+} from 'antd';
 import { getCookie } from '../Reusable/cookies';
-import { getUserData, getQuestions } from '../Reusable/services';
+import {
+	getUserData, getQuestions, serverIp, checkForAvatar,
+} from '../Reusable/services';
 import { Profilepic, Questions } from '../Styles';
 import Question from '../Reusable/Components/Question';
 
@@ -19,6 +23,7 @@ export default class Profile extends React.Component {
 
 	refresh = () => {
 		const { match } = this.props;
+		const { username } = this.state;
 		// Get profile information from backend
 		getUserData(match.params.username)
 			.then((res) => {
@@ -33,12 +38,20 @@ export default class Profile extends React.Component {
 					.then((response) => {
 						this.setState({ questions: response.data });
 					});
+				checkForAvatar(username)
+					.then((result) => {
+						this.setState({
+							avatar: result.data,
+						});
+					});
 			});
 	}
 
 	render() {
 		const { history, match } = this.props;
-		const { username, description, questions } = this.state;
+		const {
+			avatar, username, description, questions,
+		} = this.state;
 		const LoggedIn = () => (
 			<Layout style={{
 				minHeight: '100vh', width: '100%', paddingLeft: '10%', paddingRight: '10%', overflow: 'auto',
@@ -48,12 +61,18 @@ export default class Profile extends React.Component {
 					width: '100%', height: '95vh', paddingTop: '5vh',
 				}}
 				>
-					<a href='https://placeholder.com' style={{ float: 'left', marginRight: '10px' }}><Profilepic src={`http://127.0.0.1:8080/public/${username}`} alt='100x100' /></a>
+					<a href={`/profile/${username}`} style={{ float: 'left', marginRight: '10px' }}>
+						{
+							avatar
+								? <Profilepic src={`${serverIp}/public/${username}`} alt='100x100' />
+								: <Avatar icon='user' size={80} />
+						}
+					</a>
 					<Title level={2}>{username}</Title>
 					<Paragraph strong>{description}</Paragraph>
 					{getCookie('login') === match.params.username
 						? null
-						: <Button href={`/ask/${username}`} type='primary' style={{ width: '40%', marginLeft: '30%' }}>Ask question</Button>}
+						: <Button href={`/ask/${username}`} type='primary'>Ask this user</Button>}
 					<Questions>
 						{questions.reverse().map(question => (
 							<Question

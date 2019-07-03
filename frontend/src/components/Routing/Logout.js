@@ -2,12 +2,19 @@ import { removeCookie, getCookie } from '../Reusable/cookies';
 
 
 const Logout = ({ history }) => {
-	if (getCookie('login')) {
-		removeCookie('login');
-		history.push('/', { refresh: true });
-	} else {
-		history.push('/', { refresh: true });
-	}
+	const remove = () => (
+		new Promise((resolve, reject) => {
+			removeCookie('login');
+			if (getCookie('login') === undefined) {
+				resolve('ok');
+			} else {
+				reject();
+			}
+		})
+	);
+	remove().then((res) => {
+		if (res) history.push('/', { refresh: true });
+	});
 	return null;
 };
 

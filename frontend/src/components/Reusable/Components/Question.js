@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Input, Button, Form } from 'antd';
-import { answerQuestion } from '../services';
+import { Input, Button, Form, Avatar, Typography } from 'antd';
+import { answerQuestion, serverIp } from '../services';
 import { QuestionDiv } from '../../Styles';
 import { getCookie } from '../cookies';
 
@@ -33,7 +33,12 @@ class Question extends React.Component {
 		return (
 			<QuestionDiv>
 				<Form onSubmit={this.handleAnswer}>
-					<p>{question.content}</p>
+					<Typography.Paragraph>
+						<a href={`/profile/${question.asked_by}`}>
+							<Avatar icon='user' size='large' src={`${serverIp}/public/${question.asked_by}`} />
+							{question.asked_by}
+						</a>
+					</Typography.Paragraph>
 					{question.answer || username !== getCookie('login')
 						? question.answer
 						: <Input onChange={e => this.onChange(e)} placeholder="Answer" />}

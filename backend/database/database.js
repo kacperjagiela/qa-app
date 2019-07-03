@@ -140,9 +140,9 @@ class Database {
 		})
 	}
 	// Handle question asking
-	askQuestion(username, question, callback){
+	askQuestion(username, question, asked, callback){
 		this.pool.getConnection((err, connection) => {
-			connection.query(`INSERT INTO QA_questions(content, user_id) VALUES ('${question}', (SELECT id FROM QA_users WHERE username='${username}'))`, (err, rows) => {
+			connection.query(`INSERT INTO QA_questions(content, user_id, asked_by) VALUES ('${question}', (SELECT id FROM QA_users WHERE username='${username}'), '${asked}')`, (err, rows) => {
 				if (err) throw err;
 				callback(null, true);
 			})

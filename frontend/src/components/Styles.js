@@ -1,5 +1,7 @@
 import styled, { keyframes } from 'styled-components';
-import { fadeInRight, fadeInLeft } from 'react-animations';
+import {
+	fadeInRight, zoomIn, slideInRight, slideInDown, fadeIn,
+} from 'react-animations';
 
 // move generic styled components to /styles dir
 
@@ -23,15 +25,17 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+animation: 1.3s ${keyframes`${zoomIn}`};
 `;
 
 export const Profilepic = styled.img`
 width:150px;
 height:150px;
+border-radius:50%;
 
 @media screen and (max-width:700px){
-width:100px;
-height:100px;
+	width:100px;
+	height:100px;
 }`;
 
 export const RandomQuestions = styled.div`
@@ -48,12 +52,12 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-animation: 1.5s ${keyframes`${fadeInLeft}`};
+animation: 1.2s ${keyframes`${fadeIn}`};
 
 @media screen and (max-width:768px){
-padding-top:2vh;
-width:100vw;
-margin-left: 0;
+	padding-top:2vh;
+	width:100vw;
+	margin-left: 0;
 }
 `;
 
@@ -72,17 +76,18 @@ width:100%;
 padding:10px;
 margin-top:2vh;
 min-height:3vh;
-border: 1px solid red;
+border: 1px solid #1890ff;
 border-radius:5px;
 overflow:auto;
 
 @media screen and (max-width:768px){
-width:100%;
+	width:100%;
 }
 `;
 
 export const Questions = styled.div`
 width:100%;
+animation: 1.2s ${keyframes`${slideInRight}`};
 `;
 
 export const Welcome = styled.div`
@@ -93,4 +98,15 @@ display:flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+animation: 1.3s ${keyframes`${slideInDown}`};
+`;
+
+export const WelcomeTitle = styled.h1`
+font-size: 4.5vw;
+font-family: 'Indie Flower';
+font-weight: bold;
+
+@media screen and (max-width:768px){
+	font-size: 6vw;
+}
 `;

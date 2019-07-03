@@ -1,11 +1,11 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const getController = require("./controllers/get.js");
-const postController = require("./controllers/post.js");
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const getController = require('./controllers/get.js');
+const postController = require('./controllers/post.js');
 
-const multer = require("multer");
-const Database = require("./database/database.js");
+const multer = require('multer');
+const Database = require('./database/database.js');
 
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -22,14 +22,14 @@ const app = express();
 
 //Enable CORS, body-parser, cookie-parser
 app.use(cookieParser(), bodyParser.urlencoded({extended:true}), bodyParser.json());
-app.use("/public", express.static('public'));
+app.use('/public', express.static('public'));
 app.use((request, response, next) => {
-    response.header("Access-Control-Allow-Origin", "http://127.0.0.1:3000");
+    response.header('Access-Control-Allow-Origin', 'http://192.168.42.253:3000');
     response.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
     );
-    response.header("Access-Control-Allow-Credentials", "true");
+    response.header('Access-Control-Allow-Credentials', 'true');
     next();
 });
 
@@ -37,4 +37,4 @@ app.use((request, response, next) => {
 getController(app,db);
 postController(app, upload, db);
 
-app.listen(8080, "127.0.0.1", ()=>console.log("Listening on 8080.."));
+app.listen(8080, '192.168.42.253', ()=>console.log('Listening on 8080..'));

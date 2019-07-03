@@ -40,7 +40,7 @@ module.exports = (app, upload, db) =>{
 	})
 	// Handle question asking
 	app.post('/ask/:username', (req, res) => {
-		db.askQuestion(req.params.username, req.body.question, (err, result) => {
+		db.askQuestion(req.params.username, req.body.question, req.body.asked, (err, result) => {
 			if (result) {
 				res.send(true);
 			} else {

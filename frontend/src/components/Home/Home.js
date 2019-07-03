@@ -21,15 +21,12 @@ export default class Home extends React.Component {
 			refresh();
 			history.location.state = undefined;
 		}
-	}
-
-	componentDidMount() {
 		this.latestQuestions();
 		this.loadAllUsers();
 	}
 
-	latestQuestions = () => {
-		getLatestQuestions().then((res) => {
+	latestQuestions = async () => {
+		await getLatestQuestions().then((res) => {
 			this.setState({
 				questions: res.data.questions,
 				users: res.data.users,
@@ -37,8 +34,8 @@ export default class Home extends React.Component {
 		});
 	}
 
-	loadAllUsers = () => {
-		getAllUsernames().then((res) => {
+	loadAllUsers = async () => {
+		await getAllUsernames().then((res) => {
 			let usernames = [];
 			const getUsernames = new Promise((resolve) => {
 				usernames = res.data.usernames.map(user => user.username);
