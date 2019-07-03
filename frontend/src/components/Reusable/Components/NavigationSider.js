@@ -5,14 +5,30 @@ import { Link } from 'react-router-dom';
 class NavigationSider extends React.Component {
 	state = {
 		collapsed: false,
+		width: 0,
 	};
+
+	componentDidMount() {
+		this.updateWindowDimensions();
+		window.addEventListener('resize', this.updateWindowDimensions);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.updateWindowDimensions);
+	}
+
+	updateWindowDimensions = () => {
+		this.setState({
+			width: window.innerWidth,
+		});
+	}
 
 	onCollapse = (collapsed) => {
 		this.setState({ collapsed });
 	};
 
 	render() {
-		const { collapsed } = this.state;
+		const { collapsed, width } = this.state;
 		const { selected, login } = this.props;
 		return (
 			<Layout.Sider
@@ -21,6 +37,7 @@ class NavigationSider extends React.Component {
 				breakpoint='md'
 				collapsedWidth='0'
 				style={{ heigth: '100vh', zIndex: 2 }}
+				width={width <= 768 ? 130 : 200}
 			>
 				<Menu theme='light' mode='inline' defaultSelectedKeys={selected.split(' ')} style={{ height: '100%' }}>
 					<Menu.Item key='home'>

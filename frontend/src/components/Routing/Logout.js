@@ -10,13 +10,8 @@ const Logout = ({ history }) => {
 			}
 		})
 	);
-	remove().then((res) => {
-		console.log(res);
-		if (res === 'ok') {
-			history.push('/', { refresh: true });
-		} else {
-			history.push('/logout');
-		}
+	remove().then(() => {
+		history.push('/', { refresh: true });
 	});
 	return null;
 };

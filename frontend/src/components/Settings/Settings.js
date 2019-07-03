@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-	Layout, Form, Input, Icon, Upload, Button,
+	Layout, Form, Input, Icon, Upload, Button, Typography,
 } from 'antd';
 import { getCookie } from '../Reusable/cookies';
-import { sendFile } from '../Reusable/services';
+import { sendFile, changeDetails, getUserData } from '../Reusable/services';
 
 const { Content, Footer } = Layout;
 
@@ -13,6 +13,16 @@ class SettingsForm extends React.Component {
 		logged: getCookie('login'),
 		fileList: [],
 		uploading: false,
+		previousDescription: '',
+	}
+
+	componentDidMount() {
+		const { logged } = this.state;
+		getUserData(logged).then((res) => {
+			this.setState({
+				previousDescription: res.data.description,
+			});
+		});
 	}
 
 	handleUpload = () => {
@@ -38,8 +48,22 @@ class SettingsForm extends React.Component {
 			});
 	}
 
+	handleSubmit = (e) => {
+		e.preventDefault();
+		const { form } = this.props;
+		const { logged } = this.state;
+		form.validateFields((err, values) => {
+			if (values) {
+				changeDetails(values, logged)
+					.then((result) => {
+						console.log(result);
+					});
+			}
+		});
+	}
+
 	render() {
-		const { logged, uploading, fileList } = this.state;
+		const { logged, uploading, fileList, previousDescription } = this.state;
 		const { form, history } = this.props;
 		const props = {
 			onRemove: (file) => {
@@ -67,18 +91,28 @@ class SettingsForm extends React.Component {
 				}}
 				>
 					<Content>
+						<Typography.Title level={2} style={{ paddingTop: '5vh', textAlign: 'center', marginBottom: '12px' }}>
+							Settings
+							{' '}
+							<Icon type="setting" />
+						</Typography.Title>
 						<Form onSubmit={this.handleSubmit}>
+							<Typography.Paragraph>
+								Change your description:
+							</Typography.Paragraph>
 							<Form.Item>
-								{form.getFieldDecorator('username')(<Input prefix={<Icon type='user' />} allowClear />)}
+								{
+									form.getFieldDecorator('description', { initialValue: previousDescription })(<Input.TextArea placeholder='Update description' />)
+								}
 							</Form.Item>
-							<Form.Item>
-								{form.getFieldDecorator('description')(<Input.TextArea placeholder='Update description' />)}
-							</Form.Item>
+							<Typography.Paragraph>
+								Change your profile picture:
+							</Typography.Paragraph>
 							<Form.Item>
 								<Upload {...props}>
 									<Button>
 										<Icon type="upload" />
-										Select File
+										Choose image
 									</Button>
 								</Upload>
 								<Button
@@ -88,9 +122,12 @@ class SettingsForm extends React.Component {
 									loading={uploading}
 									style={{ marginTop: 16 }}
 								>
-									{uploading ? 'Uploading' : 'Start Upload'}
+									{uploading ? 'Uploading' : 'Change profile picture'}
 								</Button>
 							</Form.Item>
+							<Button style={{ width: '60%', marginLeft: '20%', marginTop: '5%' }} type='primary' htmlType='submit'>
+								Save description
+							</Button>
 						</Form>
 					</Content>
 					<Footer style={{ width: '100%', textAlign: 'center' }}>

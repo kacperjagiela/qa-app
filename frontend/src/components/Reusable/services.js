@@ -22,6 +22,8 @@ export const answerQuestion = (questionID, questionAnswer) => (axios.post(`${ser
 
 export const askQuestion = (username, questionContent, askedBy) => (axios.post(`${serverIp}/ask/${username}`, { question: questionContent, asked: askedBy }));
 
+export const changeDetails = (newDetails, username) => (axios.post(`${serverIp}/changeDetails/${username}`, { details: newDetails }));
+
 export const sendFile = (data, username) => (
 	axios.post(`${serverIp}/updatePicture/${username}`, data, {
 		headers: {

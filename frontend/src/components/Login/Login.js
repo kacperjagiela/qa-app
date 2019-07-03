@@ -46,14 +46,14 @@ class LoginForm extends React.Component {
 						{form.getFieldDecorator('username', {
 							rules: [{ required: true, message: 'Please enter your username!' }],
 						})(
-							<Input prefix={<Icon type='user' />} placeholder='Username' />,
+							<Input prefix={<Icon type='user' />} placeholder='Username' allowClear />,
 						)}
 					</Form.Item>
 					<Form.Item>
 						{form.getFieldDecorator('password', {
 							rules: [{ required: true, message: 'Please enter your password!' }],
 						})(
-							<Input prefix={<Icon type='lock' />} type='password' placeholder='Password' />,
+							<Input prefix={<Icon type='lock' />} type='password' placeholder='Password' allowClear />,
 						)}
 					</Form.Item>
 					<Form.Item>

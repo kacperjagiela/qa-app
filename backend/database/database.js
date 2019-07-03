@@ -149,6 +149,22 @@ class Database {
 			connection.release();
 		})
 	}
+	// Handle detail changing
+	changeDetails(newDetails, username, callback){
+		this.pool.getConnection((err, connection) => {
+			const columns = [];
+			const values = [];
+			for (const [key, value] of Object.entries(newDetails)){
+				columns.push(key);
+				values.push(value)
+			}
+			connection.query(`UPDATE QA_users SET ${columns[0]}='${values[0]}' WHERE username='${username}'`, (err, result) => {
+				if (err) throw err;
+				callback(null, true);
+			})
+			connection.release();
+		})
+	}
 }
 
 module.exports = Database;

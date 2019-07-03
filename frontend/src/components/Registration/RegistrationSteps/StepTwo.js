@@ -65,7 +65,7 @@ class StepTwoForm extends React.Component {
 								required: true, message: 'Please enter your username!',
 							}],
 						})(
-							<Input prefix={<Icon type='user' />} style={{ width: '50%' }} placeholder='Username' />,
+							<Input prefix={<Icon type='user' />} style={{ width: '50%' }} placeholder='Username' allowClear />,
 						)}
 					</FormItem>
 					<FormItem label='Password' hasFeedback>
@@ -76,7 +76,7 @@ class StepTwoForm extends React.Component {
 								validator: this.checkPassword,
 							}],
 						})(
-							<Input prefix={<Icon type='lock' />} type='password' style={{ width: '50%' }} placeholder='Password' />,
+							<Input prefix={<Icon type='lock' />} type='password' style={{ width: '50%' }} placeholder='Password' allowClear />,
 						)}
 					</FormItem>
 					<FormItem label='Confirm Password' hasFeedback>
@@ -87,7 +87,7 @@ class StepTwoForm extends React.Component {
 								validator: this.checkConfirm,
 							}],
 						})(
-							<Input prefix={<Icon type='lock' />} type='password' style={{ width: '50%' }} placeholder='Confirm password' onBlur={this.handleConfirmBlur} />,
+							<Input prefix={<Icon type='lock' />} type='password' style={{ width: '50%' }} placeholder='Confirm password' onBlur={this.handleConfirmBlur} allowClear />,
 						)}
 					</FormItem>
 					<Button onClick={prevStep}>Previous</Button>

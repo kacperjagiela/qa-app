@@ -57,4 +57,10 @@ module.exports = (app, upload, db) =>{
 			}
 		})
 	});
+	// Handle changing details
+	app.post('/changeDetails/:username', (req, res) => {
+		db.changeDetails(req.body.details, req.params.username, (err, result) => {
+			res.send(result);
+		})
+	})
 }

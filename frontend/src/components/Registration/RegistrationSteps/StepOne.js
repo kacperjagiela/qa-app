@@ -36,7 +36,7 @@ class StepOneForm extends React.Component {
 								type: 'email', message: 'The input is not valid E-mail!',
 							}],
 						})(
-							<Input prefix={<Icon type='mail' />} style={{ width: '50%' }} placeholder='Email' />,
+							<Input prefix={<Icon type='mail' />} style={{ width: '50%' }} placeholder='Email' allowClear />,
 						)}
 					</FormItem>
 					<Button type='primary' htmlType='submit'>Next</Button>
