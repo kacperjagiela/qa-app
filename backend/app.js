@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const getController = require('./controllers/get.js');
-const postController = require('./controllers/post.js');
+const routeController = require('./components/controller.js');
 
 const multer = require('multer');
 const Database = require('./database/database.js');
@@ -33,8 +32,7 @@ app.use((request, response, next) => {
     next();
 });
 
-//Initialize controllers
-getController(app,db);
-postController(app, upload, db);
+//Initialize controller
+routeController(app, db, upload);
 
 app.listen(8080, '192.168.42.253', ()=>console.log('Listening on 8080..'));

@@ -36,7 +36,7 @@ class Database {
 	// Get questions for user
 	getQuestions(id, callback) {
 		this.pool.getConnection((err, connection) => {
-			connection.query(`SELECT * FROM QA_questions WHERE user_id=${id}`, (err, result) => {
+			connection.query(`SELECT * FROM QA_questions WHERE user_id=${id} ORDER BY id DESC`, (err, result) => {
 				if (result[0]) {
 					callback(null, result);
 				}

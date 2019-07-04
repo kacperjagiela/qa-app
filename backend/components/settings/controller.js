@@ -1,33 +1,4 @@
-const saltRounds = 10;
-
-module.exports = (app, upload, db) =>{
-	// Register
-	app.post('/register', (req, res)=>{
-		db.registerUser(req.body, (err, result)=>{
-			if (err) throw err;
-			res.send(result);
-		})
-	});
-	// Login
-	app.post('/login', (req, res)=>{
-		db.loginUser(req.body, (err, result) => {
-			if (err) throw err;
-			if (result) {
-				res.cookie('login', req.body.username, {maxAge:9999999, HttpOnly:false}).send('Logged in');
-			} else {
-				res.send('Wrong username or password');
-			}
-		})
-	});
-	// Handle file input
-	app.post('/add-file', upload.single('file'), (req, res)=> {
-		const file = req.file;
-		if (file) {
-			res.send('done');
-		} else {
-			res.send('error')
-		}
-	});
+module.exports = (app, db, upload) => {
 	// Handle profile picture update
 	app.post('/updatePicture/:username', upload.single('file'), (req, res) => {
 		const file = req.file;
