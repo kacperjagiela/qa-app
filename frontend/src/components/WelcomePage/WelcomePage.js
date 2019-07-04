@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from 'antd';
-import { Welcome, WelcomeTitle } from '../Styles';
+import { Welcome } from '../Styles';
 
 class WelcomePage extends React.Component {
 	render() {
@@ -14,7 +14,7 @@ class WelcomePage extends React.Component {
 		}
 		return (
 			<Welcome>
-				<WelcomeTitle>Let&apos;s know each other!</WelcomeTitle>
+				<Typography.Title level={2}>Let&apos;s know each other!</Typography.Title>
 				<Typography.Paragraph style={{ fontFamily: 'Roboto', fontWeight: 'bold' }}>Enter the best Question and Answers site</Typography.Paragraph>
 				<Link to='/register'><Button type='primary' size='large' shape='round'>Join now</Button></Link>
 				<h4>

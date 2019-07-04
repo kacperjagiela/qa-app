@@ -63,7 +63,9 @@ class SettingsForm extends React.Component {
 	}
 
 	render() {
-		const { logged, uploading, fileList, previousDescription } = this.state;
+		const {
+			logged, uploading, fileList, previousDescription,
+		} = this.state;
 		const { form, history } = this.props;
 		const props = {
 			onRemove: (file) => {

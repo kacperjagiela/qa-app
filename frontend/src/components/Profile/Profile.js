@@ -70,7 +70,7 @@ export default class Profile extends React.Component {
 					<Title level={2}>{username}</Title>
 					{
 						description !== 'undefined'
-							? <Paragraph strong>{description}</Paragraph>
+							? <Paragraph strong style={{ marginBottom: '100px' }}>{description}</Paragraph>
 							: null
 					}
 					{getCookie('login') === match.params.username

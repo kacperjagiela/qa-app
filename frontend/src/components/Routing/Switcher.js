@@ -8,10 +8,12 @@ import Settings from '../Settings/Settings';
 import Logout from './Logout';
 import Ask from '../Ask/Ask';
 import Search from '../Search/Search';
+import Forgot from '../Forgot/Forgot';
 
 const Switcher = ({ refresh }) => (
 	<Switch>
 		<Route exact path='/ask/:username' component={Ask} />
+		<Route exact path='/forgot' component={Forgot} />
 		<Route exact path='/settings' component={Settings} />
 		<Route exact path='/profile/:username' component={withRouter(Profile)} />
 		<Route exact path='/register' component={withRouter(Registration)} />

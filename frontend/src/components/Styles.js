@@ -25,7 +25,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-animation: 1.3s ${keyframes`${zoomIn}`};
+animation: 1.2s ${keyframes`${zoomIn}`};
 `;
 
 export const Profilepic = styled.img`
@@ -81,7 +81,7 @@ overflow:auto;
 
 export const Questions = styled.div`
 width:100%;
-margin-top:120px;
+margin-top:20px;
 border-top: 1px solid #1890ff;
 animation: 1.2s ${keyframes`${fadeIn}`};
 
@@ -99,14 +99,4 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 animation: 1.3s ${keyframes`${slideInDown}`};
-`;
-
-export const WelcomeTitle = styled.h1`
-font-size: 4.5vw;
-font-family: 'Indie Flower';
-font-weight: bold;
-
-@media screen and (max-width:768px){
-	font-size: 6vw;
-}
 `;
