@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-	Layout, Form, Input, Icon, Upload, Button, Typography,
+	Layout, Form, Input, Icon, Upload, Button, Typography, Alert,
 } from 'antd';
 import { getCookie } from '../Reusable/cookies';
 import { sendFile, changeDetails, getUserData } from '../Reusable/services';
@@ -14,14 +14,17 @@ class SettingsForm extends React.Component {
 		fileList: [],
 		uploading: false,
 		previousDescription: '',
+		visible: false,
 	}
 
 	componentDidMount() {
 		const { logged } = this.state;
 		getUserData(logged).then((res) => {
-			this.setState({
-				previousDescription: res.data.description,
-			});
+			if (res.data.description !== 'undefined') {
+				this.setState({
+					previousDescription: res.data.description,
+				});
+			}
 		});
 	}
 
@@ -48,6 +51,12 @@ class SettingsForm extends React.Component {
 			});
 	}
 
+	onClose = () => {
+		const { history } = this.props;
+		const { logged } = this.state;
+		history.push(`/profile/${logged}`);
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		const { form } = this.props;
@@ -56,7 +65,9 @@ class SettingsForm extends React.Component {
 			if (values) {
 				changeDetails(values, logged)
 					.then((result) => {
-						console.log(result);
+						this.setState({
+							visible: result,
+						});
 					});
 			}
 		});
@@ -64,7 +75,7 @@ class SettingsForm extends React.Component {
 
 	render() {
 		const {
-			logged, uploading, fileList, previousDescription,
+			logged, uploading, fileList, previousDescription, visible,
 		} = this.state;
 		const { form, history } = this.props;
 		const props = {
@@ -98,6 +109,21 @@ class SettingsForm extends React.Component {
 							{' '}
 							<Icon type="setting" />
 						</Typography.Title>
+						<Alert
+							message="Description saved!"
+							type="success"
+							onClose={this.onClose}
+							style={
+								visible
+									? {
+										visibility: 'visible', position: 'relative', top: '20%', left: '20%', zIndex: 2, width: '60%',
+									}
+									: {
+										visibility: 'hidden', position: 'relative', top: '20%', left: '20%', zIndex: 2, width: '60%',
+									}}
+							showIcon
+							closable
+						/>
 						<Form onSubmit={this.handleSubmit}>
 							<Typography.Paragraph>
 								Change your description:

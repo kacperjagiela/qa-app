@@ -102,7 +102,7 @@ class Registration extends React.Component {
 						closable
 						afterClose={this.handleClose}
 						style={{
-							zIndex: 3000, position: 'absolute', top: '40vh', width: '100%', textAlign: 'center',
+							zIndex: 3000, position: 'absolute', top: '40vh', width: '40%', textAlign: 'center', left: '30vw',
 						}}
 					/>
 				) : null}
@@ -113,7 +113,7 @@ class Registration extends React.Component {
 						closable
 						afterClose={history.push('/register')}
 						style={{
-							zIndex: 3000, position: 'absolute', top: '40vh', width: '100%', textAlign: 'center',
+							zIndex: 3000, position: 'absolute', top: '40vh', width: '40%', textAlign: 'center', left: '30vw',
 						}}
 					/>
 				)}

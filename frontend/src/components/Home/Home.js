@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-	Layout, Input, Typography, AutoComplete, Button, Icon, Avatar,
+	Layout, Input, Typography, AutoComplete, Button, Icon, Avatar, Comment,
 } from 'antd';
 import { getLatestQuestions, getAllUsernames, serverIp } from '../Reusable/services';
 import { QuestionDiv, Questions } from '../Styles';
@@ -75,7 +75,7 @@ export default class Home extends React.Component {
 				minHeight: '100vh', width: '100%', paddingLeft: '10%', paddingRight: '10%', overflow: 'auto',
 			}}
 			>
-				<Content style={{ overflow: 'auto' }}>
+				<Content>
 					<Typography.Title level={3} style={{ marginTop: '10%', textAlign: 'center' }}>
 						Search for anyone!
 					</Typography.Title>
@@ -119,36 +119,47 @@ export default class Home extends React.Component {
 								});
 								return (
 									<QuestionDiv key={question.id}>
-										<Typography.Paragraph style={{ marginBottom: '0' }}>
-											<a href={`/profile/${question.asked_by}`}>
-												<Avatar icon='user' size='large' src={`${serverIp}/public/${question.asked_by}`} />
-												{` ${question.asked_by} `}
-											</a>
-											asked:
-										</Typography.Paragraph>
-										<Typography.Paragraph style={{ textIndent: '50px' }}>
-											{question.content}
-										</Typography.Paragraph>
-										<Typography.Paragraph style={{ marginBottom: '0' }}>
-											<a href={`/profile/${currentUsername}`}>
-												<Avatar icon='user' size='large' src={`${serverIp}/public/${currentUsername}`} />
-												{` ${currentUsername} `}
-											</a>
-											answered:
-										</Typography.Paragraph>
-										<Typography.Paragraph style={{ textIndent: '50px' }}>
-											{question.answer}
-										</Typography.Paragraph>
+										<Comment
+											avatar={(
+												<a href={`/profile/${question.asked_by}`}>
+													<Avatar icon='user' size='large' src={`${serverIp}/public/${question.asked_by}`} />
+												</a>
+											)}
+											author={(
+												<a href={`/profile/${question.asked_by}`}>
+													{question.asked_by}
+												</a>
+											)}
+											content={
+												question.content
+											}
+										>
+											<Comment
+												avatar={(
+													<a href={`/profile/${currentUsername}`}>
+														<Avatar icon='user' size='large' src={`${serverIp}/public/${currentUsername}`} />
+													</a>
+												)}
+												author={(
+													<a href={`/profile/${currentUsername}`}>
+														{currentUsername}
+													</a>
+												)}
+												content={
+													question.answer
+												}
+											/>
+										</Comment>
 									</QuestionDiv>
 								);
 							}
 							return null;
 						})}
 					</Questions>
+					<Footer style={{ width: '100%', textAlign: 'center' }}>
+						Created by Kacper Jagieła
+					</Footer>
 				</Content>
-				<Footer style={{ width: '100%', textAlign: 'center' }}>
-					Created by Kacper Jagieła
-				</Footer>
 			</Layout>
 		);
 	}

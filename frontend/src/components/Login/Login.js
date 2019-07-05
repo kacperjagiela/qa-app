@@ -12,6 +12,7 @@ class LoginForm extends React.Component {
 		super(props);
 		this.state = {
 			logged: getCookie('login'),
+			status: '',
 		};
 	}
 
@@ -23,7 +24,15 @@ class LoginForm extends React.Component {
 				login(values)
 					.then((res) => {
 						if (res.data === 'Logged in') {
-							history.push('/home', { refresh: true });
+							this.setState({
+								status: 'success',
+							}, () => {
+								history.push('/home', { refresh: true });
+							});
+						} else {
+							this.setState({
+								status: 'error',
+							});
 						}
 					})
 					.catch(error => (error));
@@ -32,7 +41,7 @@ class LoginForm extends React.Component {
 	}
 
 	render() {
-		const { logged } = this.state;
+		const { logged, status } = this.state;
 		const { form, history } = this.props;
 		if (logged) {
 			history.push('/', { refresh: true });
@@ -42,14 +51,14 @@ class LoginForm extends React.Component {
 			<LoginDiv>
 				<Form onSubmit={this.handleSubmit}>
 					<Typography.Title type={2}>Welcome back!</Typography.Title>
-					<Form.Item>
+					<Form.Item validateStatus={status}>
 						{form.getFieldDecorator('username', {
 							rules: [{ required: true, message: 'Please enter your username!' }],
 						})(
 							<Input prefix={<Icon type='user' />} placeholder='Username' allowClear />,
 						)}
 					</Form.Item>
-					<Form.Item>
+					<Form.Item validateStatus={status}>
 						{form.getFieldDecorator('password', {
 							rules: [{ required: true, message: 'Please enter your password!' }],
 						})(

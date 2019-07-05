@@ -60,19 +60,21 @@ export default class Profile extends React.Component {
 					width: '100%', height: '95vh', paddingTop: '5vh',
 				}}
 				>
-					<a href={`/profile/${username}`} style={{ float: 'left', marginRight: '10px' }}>
+					<div style={{ marginBottom: '100px' }}>
+						<a href={`/profile/${username}`} style={{ float: 'left', marginRight: '10px' }}>
+							{
+								avatar
+									? <Profilepic src={`${serverIp}/public/${username}`} alt='100x100' style={{ zIndex: 2 }} />
+									: <Avatar icon='user' size={80} style={{ zIndex: 2 }} />
+							}
+						</a>
+						<Title level={2}>{username}</Title>
 						{
-							avatar
-								? <Profilepic src={`${serverIp}/public/${username}`} alt='100x100' style={{ zIndex: 2 }} />
-								: <Avatar icon='user' size={80} style={{ zIndex: 2 }} />
+							description !== 'undefined'
+								? <Paragraph strong>{description}</Paragraph>
+								: null
 						}
-					</a>
-					<Title level={2}>{username}</Title>
-					{
-						description !== 'undefined'
-							? <Paragraph strong style={{ marginBottom: '100px' }}>{description}</Paragraph>
-							: null
-					}
+					</div>
 					{getCookie('login') === match.params.username
 						? null
 						: <Button href={`/ask/${username}`} type='primary'>Ask this user</Button>}
