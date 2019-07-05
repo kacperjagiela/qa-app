@@ -1,5 +1,9 @@
 const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
+const strings = require('../functions/strings.js');
+const Mailer = require('../components/mailer.js');
+
+const mailer = new Mailer();
 
 class Database {
 	constructor(){
@@ -164,6 +168,28 @@ class Database {
 			})
 			connection.release();
 		})
+	}
+	// Generate new password
+	generatePassword(username, email, callback){
+		this.pool.getConnection((err, connection) => {
+			this.getUserData(username, (error, res) => {
+				if (err) callback(null, false);
+				if (res.email === email){
+					const newPassword = strings.generateString();
+					bcrypt.genSalt(10, (err, salt)=>{
+						bcrypt.hash(newPassword, salt, (err, hash)=>{
+							this.pool.query(`UPDATE QA_users SET password = '${hash}' WHERE username = '${username}'`);
+						});
+						mailer.setDestination(res.email);
+						mailer.addPassword(newPassword);
+						mailer.sendMessage();
+						mailer.reset();
+						callback(null, true);
+					});
+				}
+			});
+			connection.release();
+		});
 	}
 }
 

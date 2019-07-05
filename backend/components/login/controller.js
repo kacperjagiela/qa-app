@@ -1,6 +1,6 @@
 module.exports = (app, db) => {
 	// Login
-	app.post('/login', (req, res)=>{
+	app.post('/login', (req, res) => {
 		db.loginUser(req.body, (err, result) => {
 			if (err) throw err;
 			if (result) {
@@ -10,4 +10,10 @@ module.exports = (app, db) => {
 			}
 		})
 	});
+	// Forgot password
+	app.post('/changePassword', (req, res) => {
+		db.generatePassword(req.body.user, req.body.email, (err, result) => {
+			res.send(result);
+		});
+	})
 }

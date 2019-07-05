@@ -63,8 +63,8 @@ export default class Profile extends React.Component {
 					<a href={`/profile/${username}`} style={{ float: 'left', marginRight: '10px' }}>
 						{
 							avatar
-								? <Profilepic src={`${serverIp}/public/${username}`} alt='100x100' />
-								: <Avatar icon='user' size={80} />
+								? <Profilepic src={`${serverIp}/public/${username}`} alt='100x100' style={{ zIndex: 2 }} />
+								: <Avatar icon='user' size={80} style={{ zIndex: 2 }} />
 						}
 					</a>
 					<Title level={2}>{username}</Title>
