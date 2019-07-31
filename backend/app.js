@@ -35,4 +35,4 @@ app.use((request, response, next) => {
 //Initialize controller
 routeController(app, db, upload);
 
-app.listen(8080, '192.168.42.253', ()=>console.log('Listening on 8080..'));
+app.listen(8080, '192.168.42.253', ()=>console.log('Listening on 192.168.42.253:8080..'));

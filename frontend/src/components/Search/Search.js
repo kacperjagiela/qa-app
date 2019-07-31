@@ -42,10 +42,10 @@ class Search extends React.Component {
 							{result}
 						</div>
 					</SearchDiv>
+					<Footer style={{ width: '100%', textAlign: 'center' }}>
+						Created by Kacper Jagieła
+					</Footer>
 				</Content>
-				<Footer style={{ width: '100%', textAlign: 'center' }}>
-					Created by Kacper Jagieła
-				</Footer>
 			</Layout>
 		);
 		const NotLoggedIn = () => {

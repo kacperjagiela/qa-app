@@ -27,7 +27,11 @@ class Database {
 	// Get user data
 	getUserData(username, callback) {
 		this.pool.getConnection((err, connection) => {
-			connection.query(`SELECT * FROM QA_users WHERE username='${username}'`, (err, result) => {
+			connection.query(`SELECT * FROM QA_users WHERE username= ?`,
+			[
+				username
+			],
+			(err, result) => {
 				if (result[0]){
 					callback(null, result[0]);
 				}else{
@@ -40,7 +44,11 @@ class Database {
 	// Get questions for user
 	getQuestions(id, callback) {
 		this.pool.getConnection((err, connection) => {
-			connection.query(`SELECT * FROM QA_questions WHERE user_id=${id} ORDER BY id DESC`, (err, result) => {
+			connection.query(`SELECT * FROM QA_questions WHERE user_id=? ORDER BY id DESC`,
+			[
+				id
+			],
+			(err, result) => {
 				if (result[0]) {
 					callback(null, result);
 				}
@@ -53,7 +61,11 @@ class Database {
 		this.pool.getConnection((err, connection) => {
 			const questions = users.map( async user => {
 				return new Promise((resolve, reject) => {
-					connection.query(`SELECT * FROM QA_questions WHERE user_id=${user.id} AND answer IS NOT NULL ORDER BY id DESC LIMIT 1`, (err, result) => {
+					connection.query(`SELECT * FROM QA_questions WHERE user_id=? AND answer IS NOT NULL ORDER BY id DESC LIMIT 1`,
+					[
+						user.id
+					],
+					(err, result) => {
 						if (err) reject(err);
 						if (result){
 							resolve(result[0]);
@@ -83,7 +95,11 @@ class Database {
 	// Search user
 	searchUser(username, callback){
 		this.pool.getConnection((err, connection) => {
-			connection.query(`SELECT * FROM QA_users WHERE username LIKE '${username}%'`, (error, result) => {
+			connection.query(`SELECT * FROM QA_users WHERE username LIKE ?%`,
+			[
+				username
+			],
+			(error, result) => {
 				if (result) {
 					callback(null, result);
 				}
@@ -94,7 +110,11 @@ class Database {
 	// Register
 	registerUser(body, callback) {
 		this.pool.getConnection((err, connection) => {
-			connection.query(`SELECT * FROM QA_users WHERE username='${body.username}'`, (err, rows, fileds) => {
+			connection.query(`SELECT * FROM QA_users WHERE username= ?`,
+			[
+				body.username
+			],
+			(err, rows, fileds) => {
 				if (err) throw err;
 				if (rows[0]) {
 					callback(null, false);
@@ -114,7 +134,11 @@ class Database {
 	// Login
 	loginUser(body, callback) {
 		this.pool.getConnection((err, connection) => {
-			connection.query(`SELECT * FROM QA_users WHERE username='${body.username}'`, (err, rows) => {
+			connection.query(`SELECT * FROM QA_users WHERE username=?`,
+			[
+				body.username
+			],
+			(err, rows) => {
 				if (err) throw err;
 				//Check if user with body.username exists
 				if (rows[0]) {
@@ -132,7 +156,12 @@ class Database {
 	// Handle question answer
 	answerQuestion(id, answer, callback){
 		this.pool.getConnection((err, connection) => {
-			connection.query(`UPDATE QA_questions SET answer='${answer}' WHERE id='${id}'`, (err, rows) => {
+			connection.query(`UPDATE QA_questions SET answer=? WHERE id=?`,
+			[
+				answer,
+				id
+			],
+			(err, rows) => {
 				if (err) throw err;
 				if (rows[0]){
 					callback(null, rows[0])
@@ -146,7 +175,13 @@ class Database {
 	// Handle question asking
 	askQuestion(username, question, asked, callback){
 		this.pool.getConnection((err, connection) => {
-			connection.query(`INSERT INTO QA_questions(content, user_id, asked_by) VALUES ('${question}', (SELECT id FROM QA_users WHERE username='${username}'), '${asked}')`, (err, rows) => {
+			connection.query(`INSERT INTO QA_questions(content, user_id, asked_by) VALUES (?, (SELECT id FROM QA_users WHERE username=?), ?)`,
+			[
+				question,
+				username,
+				asked
+			],
+			(err, rows) => {
 				if (err) throw err;
 				callback(null, true);
 			})
@@ -162,7 +197,13 @@ class Database {
 				columns.push(key);
 				values.push(value)
 			}
-			connection.query(`UPDATE QA_users SET ${columns[0]}='${values[0]}' WHERE username='${username}'`, (err, result) => {
+			connection.query(`UPDATE QA_users SET ?=? WHERE username=?`,
+			[
+				columns[0],
+				values[0],
+				username
+			],
+			(err, result) => {
 				if (err) throw err;
 				callback(null, true);
 			})
@@ -178,7 +219,7 @@ class Database {
 					const newPassword = strings.generateString();
 					bcrypt.genSalt(10, (err, salt)=>{
 						bcrypt.hash(newPassword, salt, (err, hash)=>{
-							this.pool.query(`UPDATE QA_users SET password = '${hash}' WHERE username = '${username}'`);
+							this.pool.query(`UPDATE QA_users SET password = ? WHERE username = ?`, [hash, username]);
 						});
 						mailer.setDestination(res.email);
 						mailer.addPassword(newPassword);

@@ -157,10 +157,10 @@ class SettingsForm extends React.Component {
 								Save description
 							</Button>
 						</Form>
+						<Footer style={{ width: '100%', textAlign: 'center' }}>
+							Created by Kacper Jagieła
+						</Footer>
 					</Content>
-					<Footer style={{ width: '100%', textAlign: 'center' }}>
-						Created by Kacper Jagieła
-					</Footer>
 				</Layout>
 			);
 		}

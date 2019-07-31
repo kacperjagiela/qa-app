@@ -55,10 +55,10 @@ class AskForm extends React.Component {
 								</Form.Item>
 							</Form>
 						</LoginDiv>
+						<Footer style={{ width: '100%', textAlign: 'center' }}>
+							Created by Kacper Jagieła
+						</Footer>
 					</Content>
-					<Footer style={{ width: '100%', textAlign: 'center' }}>
-						Created by Kacper Jagieła
-					</Footer>
 				</Layout>
 			);
 		}
