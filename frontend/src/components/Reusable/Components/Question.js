@@ -1,17 +1,16 @@
 import * as React from 'react';
 import {
-	Input, Button, Form, Avatar, Typography, Comment, Icon,
+	Input, Button, Form, Avatar, Typography, Comment,
 } from 'antd';
-import { answerQuestion, serverIp, deleteQuestion } from '../services';
+import { answerQuestion, serverIp } from '../services';
 import { QuestionDiv } from '../../Styles';
 import { getCookie } from '../cookies';
 
 class Question extends React.Component {
 	constructor(props) {
 		super(props);
-		const { question, username } = this.props;
+		const { question } = this.props;
 		this.state = {
-			user: username === getCookie('login'),
 			answer: question.answer,
 		};
 	}
@@ -30,16 +29,9 @@ class Question extends React.Component {
 		refresh();
 	}
 
-	handleDelete = (id) => {
-		const { refresh } = this.props;
-		deleteQuestion(id);
-		refresh();
-		console.log('delete');
-	}
-
 	render() {
-		const { question, username, id } = this.props;
-		const { answer, user } = this.state;
+		const { question, username } = this.props;
+		const { answer } = this.state;
 		return (
 			<QuestionDiv>
 				<Form onSubmit={this.handleAnswer}>
@@ -54,20 +46,6 @@ class Question extends React.Component {
 							question.content
 						)}
 					>
-						{
-							user
-								?	(
-									<Icon
-										type="close-square"
-										theme='twoTone'
-										style={{
-											fontSize: '16px', cursor: 'pointer', position: 'absolute', right: '50px', top: '10px',
-										}}
-										onClick={() => this.handleDelete(id)}
-									/>
-								)
-								: null
-						}
 						{
 							question.answer
 								?	(

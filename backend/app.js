@@ -23,8 +23,7 @@ const app = express();
 app.use(cookieParser(), bodyParser.urlencoded({extended:true}), bodyParser.json());
 app.use('/public', express.static('public'));
 app.use((request, response, next) => {
-	response.header('Access-Control-Allow-Origin', 'http://192.168.42.253:3000');
-	response.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+    response.header('Access-Control-Allow-Origin', 'http://192.168.42.253:3000');
     response.header(
       'Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept'
