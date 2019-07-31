@@ -22,6 +22,8 @@ export const answerQuestion = (questionID, questionAnswer) => (axios.post(`${ser
 
 export const askQuestion = (username, questionContent, askedBy) => (axios.post(`${serverIp}/ask/${username}`, { question: questionContent, asked: askedBy }));
 
+export const deleteQuestion = id => (axios.delete(`${serverIp}/deleteQuestion`, { data: { questionID: id } }));
+
 export const changeDetails = (newDetails, username) => (axios.post(`${serverIp}/changeDetails/${username}`, { details: newDetails }));
 
 export const generatePassword = (username, userEmail) => (axios.post(`${serverIp}/changePassword`, { user: username, email: userEmail }));

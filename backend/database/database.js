@@ -219,7 +219,7 @@ class Database {
 					const newPassword = strings.generateString();
 					bcrypt.genSalt(10, (err, salt)=>{
 						bcrypt.hash(newPassword, salt, (err, hash)=>{
-							this.pool.query(`UPDATE QA_users SET password = ? WHERE username = ?`, [hash, username]);
+							connection.query(`UPDATE QA_users SET password = ? WHERE username = ?`, [hash, username]);
 						});
 						mailer.setDestination(res.email);
 						mailer.addPassword(newPassword);
@@ -231,6 +231,15 @@ class Database {
 			});
 			connection.release();
 		});
+	}
+	// Deleting questions
+	deleteQuestion(id, callback) {
+		this.pool.getConnection((err, connection) => {
+			connection.query('DELETE FROM QA_questions WHERE id=?', [id]);
+			connection.release();
+			if (err) callback(false);
+			else callback(true);
+		})
 	}
 }
 

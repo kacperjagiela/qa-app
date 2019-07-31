@@ -6,4 +6,11 @@ module.exports = (app, db) => {
 			res.send(result);
 		});
 	});
+	// Allow deleting
+	app.delete('/deleteQuestion', (req, res) => {
+		console.log(req.body);
+		db.deleteQuestion(req.body.questionID, result => {
+			res.send(result);
+		})
+	})
 }

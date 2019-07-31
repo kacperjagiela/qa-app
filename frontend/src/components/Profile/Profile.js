@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
 	Layout, Typography, Button, Avatar,
 } from 'antd';
+import { compare } from '../Reusable/functions';
 import { getCookie } from '../Reusable/cookies';
 import {
 	getUserData, getQuestions, serverIp, checkForAvatar,
@@ -79,12 +80,13 @@ export default class Profile extends React.Component {
 						? null
 						: <Button href={`/ask/${username}`} type='primary'>Ask this user</Button>}
 					<Questions>
-						{questions.reverse().map(question => (
+						{questions.sort(compare).reverse().map(question => (
 							<Question
 								question={question}
 								refresh={this.refresh}
 								username={username}
 								key={question.id}
+								id={question.id}
 							/>
 						))}
 					</Questions>
