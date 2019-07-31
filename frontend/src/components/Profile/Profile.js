@@ -71,8 +71,8 @@ export default class Profile extends React.Component {
 						</a>
 						<Title level={2}>{username}</Title>
 						{
-							description !== 'undefined'
-								? <Paragraph strong>{description}</Paragraph>
+							description !== undefined
+								? <Paragraph style={{ whiteSpace: 'pre' }} strong>{description}</Paragraph>
 								: null
 						}
 					</div>

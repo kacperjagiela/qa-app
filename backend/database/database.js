@@ -197,10 +197,8 @@ class Database {
 				columns.push(key);
 				values.push(value)
 			}
-			connection.query(`UPDATE QA_users SET ?=? WHERE username=?`,
+			connection.query(`UPDATE QA_users SET ${columns[0]}='${values[0]}' WHERE username=?`,
 			[
-				columns[0],
-				values[0],
 				username
 			],
 			(err, result) => {
