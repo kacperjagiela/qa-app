@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-export const serverIp = 'http://192.168.42.253:8080';
+export const serverIp = 'ENTER BACKEND IP';
 
 export const getUserData = username => (axios.get(`${serverIp}/profile/${username}`));
 

@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const routeController = require('./components/controller.js');
+require('dotenv').config();
 
 const multer = require('multer');
 const Database = require('./database/database.js');
@@ -23,7 +24,7 @@ const app = express();
 app.use(cookieParser(), bodyParser.urlencoded({extended:true}), bodyParser.json());
 app.use('/public', express.static('public'));
 app.use((request, response, next) => {
-    response.header('Access-Control-Allow-Origin', 'http://192.168.42.253:3000');
+    response.header('Access-Control-Allow-Origin', `http://${process.env.QA_FRONTEND_IP}:3000`);
     response.header(
       'Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept'
@@ -35,4 +36,4 @@ app.use((request, response, next) => {
 //Initialize controller
 routeController(app, db, upload);
 
-app.listen(8080, '192.168.42.253', ()=>console.log('Listening on 192.168.42.253:8080..'));
+app.listen(8080, process.env.QA_BACKEND_IP, ()=>console.log(`Listening on ${process.env.QA_BACKEND_IP}:8080..`));
